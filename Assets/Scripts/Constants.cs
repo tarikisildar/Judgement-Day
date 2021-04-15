@@ -15,5 +15,10 @@
     
     //Tags
     public const string SpawnPositionTag = "SpawnPosition";
-
+    
+    
+    //Event Time Delays
+    public const float FirstBatch = 0.2f;
+    public const float SecondBatch = 0.3f;
+    public const float ThirdBatch = 0.4f;
 }

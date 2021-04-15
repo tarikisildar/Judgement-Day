@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Controllers;
 using Enums;
 using UnityEngine;
 using Random = System.Random;
@@ -35,19 +36,35 @@ namespace Managers
                     Destroy(enemy);
                 }
             }
+            
+            CreateMainPlayer();
+
+            CreateOtherPlayers();
+            
+            LoadEnvironment(map);
+        }
+
+        private void CreateMainPlayer()
+        {
             Characters chosenCharacter = (Characters)PlayerPrefs.GetInt(Constants.PlayerKey, 0);
             var playerPrefab =
                 Resources.Load(Constants.CharactersPath + Enum.GetName(typeof(Characters), chosenCharacter)) as GameObject;
             mainPlayer = Instantiate(playerPrefab, universeTransform);
+            mainPlayer.AddComponent<PlayerController>();
+            mainPlayer.GetComponent<Rigidbody>().centerOfMass = new Vector3(0,-0.2f,0f);
+        }
 
+        private void CreateOtherPlayers()
+        {
             for (int i = 0; i < Constants.PlayerCount-1; i++)
             {
-                chosenCharacter = (Characters) typeof(Characters).GetRandomEnumValue();
-                playerPrefab = Resources.Load(Constants.CharactersPath + Enum.GetName(typeof(Characters), chosenCharacter)) as GameObject;
-                otherPlayers.Add(Instantiate(playerPrefab, universeTransform));
+                var chosenCharacter = (Characters) typeof(Characters).GetRandomEnumValue();
+                var playerPrefab = Resources.Load(Constants.CharactersPath + Enum.GetName(typeof(Characters), chosenCharacter)) as GameObject;
+                var player = Instantiate(playerPrefab, universeTransform);
+                player.GetComponent<Rigidbody>().centerOfMass = new Vector3(0,-0.2f,0f);
+                otherPlayers.Add(player);
+
             }
-            
-            LoadEnvironment(map);
         }
 
         private void GoToMainMenu()
