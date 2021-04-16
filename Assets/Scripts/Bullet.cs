@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class Bullet : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class Bullet : MonoBehaviour
     public float lifeDuration = 3f;
     public float damage = 3f;
     private float lifeTimer;
+    public float power = 100000f;
     void Start()
     {
         lifeTimer = lifeDuration;
@@ -24,9 +26,17 @@ public class Bullet : MonoBehaviour
         }
     }
 
+    void KnockBack(Collision other)
+    {
+        Debug.Log("KNOCKBACKED");
+        other.gameObject.transform.DOMove(other.transform.position + transform.forward * power, 1f);
+    }
+
     void OnCollisionEnter(Collision other) {
         if(other.gameObject.GetComponent<CharacterStats>() != null) {
             other.gameObject.GetComponent<CharacterStats>().health -= 10;
+            KnockBack(other);
+            Destroy(this.gameObject);
         }
     }
 }

@@ -24,7 +24,6 @@ public class ProjectileShooter : MonoBehaviour
 
     public void Fire()
     {
-        Debug.Log("Fire");
         GameObject projectile = Instantiate(bullet);
         projectile.transform.position = transform.position + transform.forward;
         projectile.transform.forward = transform.forward;

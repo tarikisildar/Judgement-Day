@@ -140,6 +140,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7898948301d98b840ae1eda64f11c3f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: 0
   maxHealth: 50
   healthBarUI: {fileID: 8924823971786460728}
   slider: {fileID: 5288073865546305098}
