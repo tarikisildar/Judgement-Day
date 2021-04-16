@@ -15,3 +15,4 @@ MonoBehaviour:
   hasDirection: 1
   projectile: {fileID: 7285837596139235777, guid: 2e7c9cc1c93c609429cad27011cb4de3,
     type: 3}
+  coolDownTime: 2
