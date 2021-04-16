@@ -74,6 +74,7 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
         FormatInput();
         HandleInput(input.magnitude, input.normalized, radius, cam);
         handle.anchoredPosition = input * radius * handleRange;
+
     }
 
     protected virtual void HandleInput(float magnitude, Vector2 normalised, Vector2 radius, Camera cam)
@@ -84,7 +85,9 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
                 input = normalised;
         }
         else
+        {
             input = Vector2.zero;
+        }
     }
 
     private void FormatInput()
@@ -131,6 +134,7 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
 
     public virtual void OnPointerUp(PointerEventData eventData)
     {
+
         input = Vector2.zero;
         handle.anchoredPosition = Vector2.zero;
     }

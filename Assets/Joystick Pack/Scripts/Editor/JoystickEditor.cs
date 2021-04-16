@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Enums;
 using UnityEngine;
 using UnityEditor;
 
@@ -13,6 +14,7 @@ public class JoystickEditor : Editor
     private SerializedProperty snapY;
     protected SerializedProperty background;
     private SerializedProperty handle;
+
 
     protected Vector2 center = new Vector2(0.5f, 0.5f);
 

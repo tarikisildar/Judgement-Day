@@ -17,7 +17,6 @@ namespace Controllers
             brain = GetComponent<CinemachineBrain>();
             GameManager.Instance.GoToMainMenuEvent += LockEmpty;
             GameManager.Instance.StartGameEvent += LockOnPlayer;
-
         }
 
         private void LockOnPlayer()
