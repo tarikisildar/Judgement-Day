@@ -23,4 +23,10 @@ public class Bullet : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    void OnCollisionEnter(Collision other) {
+        if(other.gameObject.GetComponent<CharacterStats>() != null) {
+            other.gameObject.GetComponent<CharacterStats>().health -= 10;
+        }
+    }
 }
