@@ -10,7 +10,7 @@ public class Bullet : MonoBehaviour
     public float lifeDuration = 3f;
     public float damage = 3f;
     private float lifeTimer;
-    public float power = 100000f;
+    public float power = 10f;
     void Start()
     {
         lifeTimer = lifeDuration;
@@ -29,7 +29,7 @@ public class Bullet : MonoBehaviour
     void KnockBack(Collision other)
     {
         Debug.Log("KNOCKBACKED");
-        other.gameObject.transform.DOMove(other.transform.position + transform.forward * power, 1f);
+        other.gameObject.transform.DOMove(other.transform.position + transform.forward , 1f);
     }
 
     void OnCollisionEnter(Collision other) {
