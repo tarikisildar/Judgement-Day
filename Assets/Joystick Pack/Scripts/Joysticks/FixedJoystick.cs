@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class FixedJoystick : Joystick
 {
-    private PlayerController controller;
+    protected PlayerController controller;
 
 
     private void OnEnable()
@@ -16,7 +16,7 @@ public class FixedJoystick : Joystick
     }
     
 
-    private void Initialize()
+    protected virtual void Initialize()
     {
         StartCoroutine(WaitForInitialize());
     }
@@ -27,7 +27,7 @@ public class FixedJoystick : Joystick
         controller = SurroundingsManager.Instance.mainPlayer.GetComponent<PlayerController>();
 
     }
-     void Update()
+     protected virtual void Update()
     {
         if (InputManager.Instance.takeInput)
         {

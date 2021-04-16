@@ -8,6 +8,7 @@
     //paths
     public const string EnvironmentsPath = "Environment/Maps/";
     public const string CharactersPath = "Environment/Characters/";
+    public const string SkillDataPath = "Scriptables/Skills/";
     
     //PlayerPrefs
     public const string MapKey = "Map";
