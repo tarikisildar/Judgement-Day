@@ -15,9 +15,6 @@ namespace Skills
         public virtual void Action()
         {
             Debug.Log("Action");
-            var projectile = Instantiate(skillData.projectile);
-            projectile.transform.position = transform.position + transform.forward;
-            projectile.transform.forward = transform.forward;
         }
 
         protected virtual void Awake()

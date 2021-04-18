@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7363bcecd71f4e41b5a3eb5e680fd144, type: 3}
-  m_Name: FireProjectile
+  m_Name: Shield
   m_EditorClassIdentifier: 
-  hasDirection: 1
-  projectile: {fileID: 2288137741535482767, guid: e35fd87f8b7bb694ba4cd9ab65255513,
+  hasDirection: 0
+  projectile: {fileID: 3692820636563634927, guid: 86663ba8c3b70e04abce21412a196290,
     type: 3}
-  coolDownTime: 1
+  coolDownTime: 5
