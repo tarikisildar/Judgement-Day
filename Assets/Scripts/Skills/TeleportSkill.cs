@@ -16,7 +16,7 @@ namespace Skills
         {
             base.Action();
             var projectile = Instantiate(skillData.projectile);
-            projectile.transform.position = transform.position + transform.forward*1.5F;
+            projectile.transform.position = transform.position + transform.forward*3F;
             transform.position = projectile.transform.position;
             Destroy(projectile);
         }
