@@ -105,7 +105,7 @@ namespace UI
             {
                 skill.Action();
                 StartCoroutine(CoolDown());
-                controller.Rotate(Vector2.zero);
+                controller.EndRotation();
             }
             base.OnPointerUp(eventData);
         }

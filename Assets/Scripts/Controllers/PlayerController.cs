@@ -61,15 +61,18 @@ namespace Controllers
             }
         }
 
+        public void EndRotation()
+        {
+            lineRenderer.enabled = false;
+            animator.SetFloat(Constants.CharacterRunDirectionXFloat,0f);
+            animator.SetFloat(Constants.CharacterRunDirectionYFloat,1f);
+        }
+        
         public void Rotate(Vector2 input)
         {
             if (input == Vector2.zero)
             {
-                lineRenderer.enabled = false;
-                animator.SetFloat(Constants.CharacterRunDirectionXFloat,0f);
-                animator.SetFloat(Constants.CharacterRunDirectionYFloat,1f);
                 return;
-                
             }
             var angle = Utils.Angle360(moveVector, input);
             float dirY = Mathf.Cos(Mathf.Deg2Rad* angle);
