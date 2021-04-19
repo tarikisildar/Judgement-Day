@@ -126,4 +126,4 @@ MonoBehaviour:
   speed: 15
   lifeDuration: 3
   damage: 3
-  power: 2
+  power: 400

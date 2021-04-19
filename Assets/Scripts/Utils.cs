@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
+using Random = System.Random;
 
 public static class Utils
 {
@@ -24,5 +26,22 @@ public static class Utils
             list[k] = list[n];  
             list[n] = value;  
         }  
+    }
+    
+    public static float Angle360(Vector2 p1, Vector2 p2, Vector2 o = default(Vector2))
+    {
+        Vector2 v1, v2;
+        if (o == default(Vector2))
+        {
+            v1 = p1.normalized;
+            v2 = p2.normalized;
+        }
+        else
+        {
+            v1 = (p1 - o).normalized;
+            v2 = (p2 - o).normalized;
+        }
+        float angle = Vector2.Angle(v1, v2);
+        return Mathf.Sign(Vector3.Cross(v1, v2).z) < 0 ? (360 - angle) % 360 : angle;
     }
 }
