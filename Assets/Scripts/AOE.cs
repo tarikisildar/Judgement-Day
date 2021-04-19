@@ -5,7 +5,7 @@ using Controllers;
 
 public class AOE : MonoBehaviour
 {
-    public float lifeDuration = 1f;
+    public float lifeDuration = 2f;
     private float lifeTimer;
 
     public float damage = 3f;
