@@ -16,7 +16,7 @@ namespace Skills
             {
                 base.Action();
                 var projectile = Instantiate(skillData.projectile);
-                projectile.transform.position = new Vector3(transform.position.x, 0.01f, transform.position.y);
+                projectile.transform.position = new Vector3(transform.position.x, 0.01f, transform.position.z);
             }
     }
 }
