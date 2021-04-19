@@ -29,7 +29,8 @@ public class Bullet : MonoBehaviour
     void KnockBack(Collision other)
     {
         Debug.Log("KNOCKBACKED");
-        other.gameObject.transform.DOMove(other.transform.position + transform.forward , 1f);
+        other.transform.GetComponent<Rigidbody>().AddForce(power * transform.forward );
+        //other.gameObject.transform.DOMove(other.transform.position + transform.forward , 1f);
     }
 
     void OnCollisionEnter(Collision other) {

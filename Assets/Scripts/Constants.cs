@@ -17,6 +17,11 @@
     //Tags
     public const string SpawnPositionTag = "SpawnPosition";
     
+    //Animation Keys
+    public const string CharacterRunAnimBool = "Run";
+    public const string CharacterRunDirectionXFloat = "DirectionX";
+    public const string CharacterRunDirectionYFloat = "DirectionY";
+    
     
     //Event Time Delays
     public const float FirstBatch = 0.2f;

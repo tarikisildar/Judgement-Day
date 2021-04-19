@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: FireProjectile
   m_EditorClassIdentifier: 
   hasDirection: 1
-  projectile: {fileID: 7285837596139235777, guid: 2e7c9cc1c93c609429cad27011cb4de3,
+  projectile: {fileID: 2288137741535482767, guid: e35fd87f8b7bb694ba4cd9ab65255513,
     type: 3}
   coolDownTime: 2
