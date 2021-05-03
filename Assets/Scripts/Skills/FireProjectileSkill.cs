@@ -1,4 +1,8 @@
-﻿namespace Skills
+﻿using Controllers;
+using Skills.Projectiles;
+using UnityEngine;
+
+namespace Skills
 {
     public class FireProjectileSkill : SkillMain
     {
@@ -8,12 +12,14 @@
             base.Awake();
         }
 
-        public override void Action()
+        public override void Action(GameObject player)
         {
-            base.Action();
+            base.Action(player);
             var projectile = Instantiate(skillData.projectile);
             projectile.transform.position = transform.position + transform.forward*0.8F;
             projectile.transform.forward = transform.forward;
+            projectile.GetComponent<Projectile>().shooter = player;
+
         }
     }
 }

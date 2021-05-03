@@ -211,6 +211,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: AI Robot
       objectReference: {fileID: 0}
+    - target: {fileID: 4107645923567472289, guid: 49caa696f566d1c4ea853b8f9c3986ae,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8094890376580911955, guid: 49caa696f566d1c4ea853b8f9c3986ae,
         type: 3}
       propertyPath: m_LocalPosition.x

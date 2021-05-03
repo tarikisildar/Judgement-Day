@@ -1,5 +1,6 @@
 ﻿
 using System;
+using Controllers;
 using Enums;
 using UnityEngine;
 
@@ -12,7 +13,7 @@ namespace Skills
 
         protected string skillDataName;
 
-        public virtual void Action()
+        public virtual void Action(GameObject player)
         {
             Debug.Log("Action");
         }

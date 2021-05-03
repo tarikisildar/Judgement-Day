@@ -16,6 +16,7 @@
     
     //Tags
     public const string SpawnPositionTag = "SpawnPosition";
+    public const string ProjectileTag = "Projectile";
     
     //Animation Keys
     public const string CharacterRunAnimBool = "Run";

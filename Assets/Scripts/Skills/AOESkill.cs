@@ -1,5 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Controllers;
+using Skills.Projectiles;
 using UnityEngine;
 
 namespace Skills
@@ -12,11 +14,13 @@ namespace Skills
                 base.Awake();
             }
 
-            public override void Action()
+            public override void Action(GameObject player)
             {
-                base.Action();
+                base.Action(player);
                 var projectile = Instantiate(skillData.projectile);
-                projectile.transform.position = new Vector3(transform.position.x, 0.01f, transform.position.z);
+                projectile.transform.position = new Vector3(transform.position.x, 0.1f, transform.position.z);
+                projectile.GetComponent<Projectile>().shooter = player;
+
             }
     }
 }

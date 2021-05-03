@@ -1,9 +1,11 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using Skills.Projectiles;
 
-public class Bullet : MonoBehaviour
+public class Bullet : Projectile
 {
     // Start is called before the first frame update
     public float speed = 40f;
@@ -14,7 +16,13 @@ public class Bullet : MonoBehaviour
     void Start()
     {
         lifeTimer = lifeDuration;
+        var projectile = Instantiate(shootParticle, transform.parent);
+        projectile.transform.position = shooter.transform.position;
+        projectile.transform.LookAt(shooter.transform.position + shooter.transform.forward*100f);
+        Destroy(projectile,2);
     }
+
+
 
     // Update is called once per frame
     void Update()
@@ -33,13 +41,29 @@ public class Bullet : MonoBehaviour
         //other.gameObject.transform.DOMove(other.transform.position + transform.forward , 1f);
     }
 
-    void OnCollisionEnter(Collision other) {
+    protected override void Action(Collision other)
+    {
+        base.Action(other);
+        
+        var particle = Instantiate(hitParticle,transform.parent);
+        var hitpoint = other.contacts[0].point;
+        particle.transform.position = hitpoint;
+        particle.transform.LookAt(hitpoint + other.contacts[0].normal * 100f);
+        Destroy(particle,3);
+        
         if(other.gameObject.GetComponent<CharacterStats>() != null) {
             other.gameObject.GetComponent<CharacterStats>().health -= damage;
             KnockBack(other);
-            Destroy(this.gameObject);
+            Destroy(gameObject);
+
         }
+
+        
+        
+        var normal = other.contacts[0].normal * 100f;
+        normal.y = 0;
+        transform.LookAt(transform.position + normal );
     }
 
-    
+
 }

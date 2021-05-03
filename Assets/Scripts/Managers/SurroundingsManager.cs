@@ -56,7 +56,8 @@ namespace Managers
 
             playerController.AddSkill(SkillSlots.Base,playerController.gameObject.AddComponent<FireProjectileSkill>());
             playerController.AddSkill(SkillSlots.Extra1,playerController.gameObject.AddComponent<TeleportSkill>());
-            playerController.AddSkill(SkillSlots.Extra2,playerController.gameObject.AddComponent<ShieldSkill>());
+            //playerController.AddSkill(SkillSlots.Extra1,playerController.gameObject.AddComponent<ShieldSkill>());
+            playerController.AddSkill(SkillSlots.Extra2,playerController.gameObject.AddComponent<AOESkill>());
             
         }
 

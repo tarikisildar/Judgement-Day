@@ -103,7 +103,7 @@ namespace UI
         {
             if (!disabled)
             {
-                skill.Action();
+                skill.Action(SurroundingsManager.Instance.mainPlayer);
                 StartCoroutine(CoolDown());
                 controller.EndRotation();
             }

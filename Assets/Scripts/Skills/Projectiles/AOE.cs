@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Controllers;
+using Skills.Projectiles;
 
-public class AOE : MonoBehaviour
+public class AOE : Projectile
 {
     public float lifeDuration = 2f;
     private float lifeTimer;
@@ -12,6 +13,7 @@ public class AOE : MonoBehaviour
     void Start()
     {
         lifeTimer = lifeDuration;
+        Instantiate(shootParticle, transform);
     }
 
     // Update is called once per frame
@@ -22,10 +24,16 @@ public class AOE : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    void OnTriggerEnter(Collider other) {
-        Debug.Log("smt");
-        if(other.gameObject.GetComponent<CharacterStats>() != null && other.gameObject.GetComponent<PlayerController>() == null) {
+
+    protected override void Action(Collider other)
+    {
+        base.Action(other);
+        if(other.gameObject.GetComponent<CharacterStats>() != null && other.gameObject != shooter) {
             other.gameObject.GetComponent<CharacterStats>().health -= damage;
+            var particle = Instantiate(hitParticle, other.transform);
+            particle.transform.position = other.transform.position;
+            Destroy(particle,2);
         }
     }
+    
 }
