@@ -131,7 +131,7 @@ MonoBehaviour:
   shooter: {fileID: 0}
   speed: 15
   lifeDuration: 3
-  damage: 8
+  damage: 80
   power: 400
 --- !u!1001 &1571576202768865774
 PrefabInstance:

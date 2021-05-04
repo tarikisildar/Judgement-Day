@@ -244,6 +244,8 @@ MonoBehaviour:
   health: 0
   maxHealth: 100
   critChance: 0.2
+  grave: {fileID: 5048895503942217791, guid: ad7f68eb6a08aab449084ce59b7edd7b, type: 3}
+  animator: {fileID: 5014095985554377785}
   healthBarUI: {fileID: 8924823971786460728}
   slider: {fileID: 5288073865546305098}
 --- !u!65 &288534193610895075
@@ -790,6 +792,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5e0b13280cef6e84983de5ee242d1352, type: 3}
+--- !u!95 &5014095985554377785 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 420032833546022680, guid: 5e0b13280cef6e84983de5ee242d1352,
+    type: 3}
+  m_PrefabInstance: {fileID: 4630232689367884577}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &530497628337463596 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5124340809966109197, guid: 5e0b13280cef6e84983de5ee242d1352,

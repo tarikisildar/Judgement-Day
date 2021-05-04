@@ -25,6 +25,7 @@ public static class Constants
     public const string CharacterRunAnimBool = "Run";
     public const string CharacterRunDirectionXFloat = "DirectionX";
     public const string CharacterRunDirectionYFloat = "DirectionY";
+    public const string CharacterDieTrigger = "Die";
     
     
     //Event Time Delays

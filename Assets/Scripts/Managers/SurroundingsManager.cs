@@ -102,6 +102,9 @@ namespace Managers
             for (int i = 0; i < otherPlayers.Count; i++)
             {
                 otherPlayers[i].transform.position = spawnPositions[i + 1].transform.position;
+                otherPlayers[i].transform.LookAt(universeTransform.position);
+                otherPlayers[i].transform.rotation = Quaternion.Euler(0,otherPlayers[i].transform.rotation.eulerAngles.y,0);
+
             }
 
         }
