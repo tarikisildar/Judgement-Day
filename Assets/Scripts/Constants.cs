@@ -1,4 +1,6 @@
-﻿public static class Constants
+﻿using UnityEngine;
+
+public static class Constants
 {
     public const string VibrationsStatusKey = "VibrationsStatus";
     public const string SoundsStatusKey = "SoundsStatus";
@@ -8,7 +10,7 @@
     //paths
     public const string EnvironmentsPath = "Environment/Maps/";
     public const string CharactersPath = "Environment/Characters/";
-    public const string SkillDataPath = "Scriptables/Skills/";
+    public const string SkillDataPath = "Skills/";
     
     //PlayerPrefs
     public const string MapKey = "Map";
@@ -28,4 +30,8 @@
     public const float FirstBatch = 0.2f;
     public const float SecondBatch = 0.3f;
     public const float ThirdBatch = 0.4f;
+    
+    
+    //Colors
+    public static Color Gold = new Color(0.84f,0.70f,0.40f);
 }

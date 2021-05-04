@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 3692820636563634927}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2.9548547, y: 2.9548547, z: 2.9548547}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -97,6 +97,7 @@ MonoBehaviour:
     type: 3}
   hitParticle: {fileID: 5012071245048805095, guid: 66071c2cd1952774c8e264ad187e500e,
     type: 3}
+  shooter: {fileID: 0}
   lifeDuration: 3
 --- !u!65 &6727279553708645096
 BoxCollider:

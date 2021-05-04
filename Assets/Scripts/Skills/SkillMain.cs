@@ -11,7 +11,6 @@ namespace Skills
         public Skill skillData;
         public SkillSlots slot;
 
-        protected string skillDataName;
 
         public virtual void Action(GameObject player)
         {
@@ -20,7 +19,11 @@ namespace Skills
 
         protected virtual void Awake()
         {
-            skillData = Resources.Load(Constants.SkillDataPath + skillDataName) as Skill;
+        }
+
+        public void LoadSkillData()
+        {
+
         }
     }
 }

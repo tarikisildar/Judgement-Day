@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Object = UnityEngine.Object;
 using Random = System.Random;
 
 public static class Utils
@@ -44,4 +45,9 @@ public static class Utils
         float angle = Vector2.Angle(v1, v2);
         return Mathf.Sign(Vector3.Cross(v1, v2).z) < 0 ? (360 - angle) % 360 : angle;
     }
+    
+    public static IEnumerable<(T item, int index)> WithIndex<T>(this IEnumerable<T> self)       
+        => self.Select((item, index) => (item, index));
+
+    
 }

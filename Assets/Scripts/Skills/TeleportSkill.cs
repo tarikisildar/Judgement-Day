@@ -10,7 +10,6 @@ namespace Skills
         // Start is called before the first frame update
         protected override void Awake()
         {
-            skillDataName = "Teleport";
             base.Awake();
         }
 
@@ -30,7 +29,7 @@ namespace Skills
             yield return new WaitForSeconds(0.5f);
             projectile.transform.parent = null;
             projectile.transform.position = transform.position + transform.forward*5F;
-            transform.position = projectile.transform.position;
+            transform.parent.position = projectile.transform.position;
         }
     }
 }

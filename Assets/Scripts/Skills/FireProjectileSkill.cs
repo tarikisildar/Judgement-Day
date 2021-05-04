@@ -8,7 +8,6 @@ namespace Skills
     {
         protected override void Awake()
         {
-            skillDataName = "FireProjectile";
             base.Awake();
         }
 

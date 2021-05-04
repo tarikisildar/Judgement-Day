@@ -10,10 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7363bcecd71f4e41b5a3eb5e680fd144, type: 3}
-  m_Name: FireProjectile
+  m_Name: Teleport
   m_EditorClassIdentifier: 
+  skillName: Teleport
+  skillScript: {fileID: 0}
   hasDirection: 1
-  projectile: {fileID: 2288137741535482767, guid: e35fd87f8b7bb694ba4cd9ab65255513,
+  projectile: {fileID: 2189320705085770614, guid: d37d3188f1dc4624da221590180aa1e0,
     type: 3}
-  coolDownTime: 1
-  icon: {fileID: 21300000, guid: a6dd139af5a465349a70f2720fcd2d16, type: 3}
+  coolDownTime: 5
+  icon: {fileID: 21300000, guid: 3fa76796a4aed80458360d210d8e8326, type: 3}

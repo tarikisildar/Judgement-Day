@@ -7,11 +7,10 @@ using UnityEngine;
 
 namespace Controllers
 {
-    public class PlayerController : MonoBehaviour
+    public class PlayerController : CharacterController
     {
         public float speed = 3;
         private Rigidbody rigidbody;
-        private List<SkillMain> skills = new List<SkillMain>();
         private float rotationByMovementTimer = 1f;
 
         private LineRenderer lineRenderer;
@@ -99,11 +98,13 @@ namespace Controllers
 
         }
 
-        public void AddSkill( SkillSlots slots, SkillMain skill)
+        public override void AddSkill(SkillSlots slots, GameObject skillObj)
         {
-            skill.slot = slots;
-            skills.Add(skill);
-            SlotManager.Instance.AddSkill(skill);
+            var skillMain = Instantiate(skillObj,transform).GetComponent<SkillMain>();
+            skillMain.transform.position = transform.position;
+            skillMain.slot = slots;
+            skills.Add(skillMain);
+            SlotManager.Instance.AddSkill(skillMain);
         }
     }
 }

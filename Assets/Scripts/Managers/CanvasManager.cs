@@ -10,6 +10,7 @@ namespace Managers
         [SerializeField] private Canvas mainMenuCanvas;
         [SerializeField] private Canvas levelFinishCanvas;
         [SerializeField] private Canvas pauseMenuCanvas;
+        [SerializeField] private Canvas skillSelectionCanvas;
 
 
         private void Awake()
@@ -23,6 +24,7 @@ namespace Managers
             GameManager.Instance.StartGameEvent += HideLevelFinishCanvas;
             GameManager.Instance.StartGameEvent += HidePauseMenuCanvas;
             GameManager.Instance.StartGameEvent += ShowGameCanvas;
+            GameManager.Instance.StartGameEvent += ShowSkillSelectionCanvas;
         }
 
         public GameCanvas GetGameCanvas()
@@ -96,6 +98,26 @@ namespace Managers
         {
             levelFinishCanvas.GetComponent<FadeHandler>().FadeOut();
         }
+        
+        public SkillSelectionCanvas GetSkillSelectionCanvas()
+        {
+            return skillSelectionCanvas.GetComponent<SkillSelectionCanvas>();
+        }
+        
+        
+        public void ShowSkillSelectionCanvas()
+        {
+            skillSelectionCanvas.GetComponent<FadeHandler>().FadeIn(0.5F);
+            skillSelectionCanvas.GetComponent<SkillSelectionCanvas>().Initialize();
+        }
+
+
+        public void HideSkillSelectionCanvas()
+        {
+            skillSelectionCanvas.GetComponent<FadeHandler>().FadeOut();
+        }
+        
+        
 
         public void HideAllCanvases()
         {

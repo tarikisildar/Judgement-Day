@@ -10,7 +10,6 @@ namespace Skills
     {
         protected override void Awake()
             {
-                skillDataName = "AOE";
                 base.Awake();
             }
 

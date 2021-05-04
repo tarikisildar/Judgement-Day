@@ -53,11 +53,13 @@ namespace Managers
             mainPlayer = Instantiate(playerPrefab, universeTransform);
             var playerController =  mainPlayer.AddComponent<PlayerController>();
             //mainPlayer.GetComponent<Rigidbody>().centerOfMass = new Vector3(0,-0.2f,0f);
+            
+            var skillObj  = Resources.Load(Constants.SkillDataPath + "FireProjectileSkill") as GameObject;
 
-            playerController.AddSkill(SkillSlots.Base,playerController.gameObject.AddComponent<FireProjectileSkill>());
-            playerController.AddSkill(SkillSlots.Extra1,playerController.gameObject.AddComponent<TeleportSkill>());
+            playerController.AddSkill(SkillSlots.Base,skillObj);
+            //playerController.AddSkill(SkillSlots.Extra1,playerController.gameObject.AddComponent<TeleportSkill>());
             //playerController.AddSkill(SkillSlots.Extra1,playerController.gameObject.AddComponent<ShieldSkill>());
-            playerController.AddSkill(SkillSlots.Extra2,playerController.gameObject.AddComponent<AOESkill>());
+            //playerController.AddSkill(SkillSlots.Extra2,playerController.gameObject.AddComponent<AOESkill>());
             
         }
 
