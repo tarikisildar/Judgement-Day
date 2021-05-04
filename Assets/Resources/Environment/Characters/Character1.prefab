@@ -242,7 +242,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 0
-  maxHealth: 50
+  maxHealth: 100
+  critChance: 0.2
   healthBarUI: {fileID: 8924823971786460728}
   slider: {fileID: 5288073865546305098}
 --- !u!65 &288534193610895075

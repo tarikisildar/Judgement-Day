@@ -10,6 +10,7 @@ public static class Constants
     //paths
     public const string EnvironmentsPath = "Environment/Maps/";
     public const string CharactersPath = "Environment/Characters/";
+    public const string DamagePopupPath = "Environment/DamagePopup";
     public const string SkillDataPath = "Skills/";
     
     //PlayerPrefs

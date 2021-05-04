@@ -9,7 +9,7 @@ public class AOE : Projectile
     public float lifeDuration = 2f;
     private float lifeTimer;
 
-    public float damage = 3f;
+    public int damage = 3;
     void Start()
     {
         lifeTimer = lifeDuration;
@@ -28,8 +28,11 @@ public class AOE : Projectile
     protected override void Action(Collider other)
     {
         base.Action(other);
-        if(other.gameObject.GetComponent<CharacterStats>() != null && other.gameObject != shooter) {
-            other.gameObject.GetComponent<CharacterStats>().health -= damage;
+        if(other.gameObject.GetComponent<CharacterStats>() != null && other.gameObject != shooter)
+        {
+            var rand = Random.Range(0f, 1f);
+            bool isCrit =  rand< shooter.GetComponent<CharacterStats>().critChance;
+            other.gameObject.GetComponent<CharacterStats>().TakeDamage(damage+ Random.Range(-1,2),isCrit);
             var particle = Instantiate(hitParticle, other.transform);
             particle.transform.position = other.transform.position;
             Destroy(particle,2);

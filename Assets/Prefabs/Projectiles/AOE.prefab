@@ -4869,7 +4869,7 @@ MonoBehaviour:
     type: 3}
   shooter: {fileID: 0}
   lifeDuration: 5
-  damage: 3
+  damage: 6
 --- !u!1001 &4641794711961251926
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -4,13 +4,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using Skills.Projectiles;
+using Random = System.Random;
 
 public class Bullet : Projectile
 {
     // Start is called before the first frame update
     public float speed = 40f;
     public float lifeDuration = 3f;
-    public float damage = 3f;
+    public int damage = 3;
     private float lifeTimer;
     public float power = 10f;
     void Start()
@@ -51,8 +52,12 @@ public class Bullet : Projectile
         particle.transform.LookAt(hitpoint + other.contacts[0].normal * 100f);
         Destroy(particle,3);
         
-        if(other.gameObject.GetComponent<CharacterStats>() != null) {
-            other.gameObject.GetComponent<CharacterStats>().health -= damage;
+        if(other.gameObject.GetComponent<CharacterStats>() != null)
+        {
+            var rand = UnityEngine.Random.Range(0f, 1f);
+            bool isCrit = rand < shooter.GetComponent<CharacterStats>().critChance;
+        
+            other.gameObject.GetComponent<CharacterStats>().TakeDamage(damage + UnityEngine.Random.Range(-1,2),isCrit);
             KnockBack(other);
             Destroy(gameObject);
 
