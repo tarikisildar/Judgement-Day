@@ -13,10 +13,10 @@ namespace UI
 {
     public class JoystickableButton : FixedJoystick
     {
-        
+        private Image icon;
         private bool isJoystickable = true;
         private SkillSlots slot;
-        private Button handleButton;
+        private GameObject handleButton;
         private bool disabled = true;
 
         private SkillMain skill;
@@ -57,13 +57,15 @@ namespace UI
             skill = skillMain;
             disabled = false;
             SetJoystickable(skill.skillData.hasDirection);
+            icon.sprite = skillMain.skillData.icon;
             SetDisable(false);
         }
         
         protected override void Initialize()
         {
             
-            handleButton = transform.GetChild(0).GetComponent<Button>();
+            handleButton = transform.GetChild(0).gameObject;
+            icon = handleButton.transform.GetChild(0).GetComponent<Image>();
             slot = transform.GetComponent<JoystickableInit>().slot;
             SetJoystickable(isJoystickable);
             

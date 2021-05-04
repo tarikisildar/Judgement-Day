@@ -9,5 +9,6 @@ namespace Skills
         public bool hasDirection;
         public GameObject projectile;
         public float coolDownTime;
+        public Sprite icon;
     }
 }

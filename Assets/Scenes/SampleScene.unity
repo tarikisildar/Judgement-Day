@@ -1358,10 +1358,30 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 96385707}
     m_Modifications:
+    - target: {fileID: 764048222327373141, guid: ae71f6a8906fd324a9cfd375c8746506,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1119587094996306309, guid: ae71f6a8906fd324a9cfd375c8746506,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1823045927801123583, guid: ae71f6a8906fd324a9cfd375c8746506,
         type: 3}
       propertyPath: slot
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2791670267175235677, guid: ae71f6a8906fd324a9cfd375c8746506,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3596698187902613107, guid: ae71f6a8906fd324a9cfd375c8746506,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3596698189224818056, guid: ae71f6a8906fd324a9cfd375c8746506,
         type: 3}
@@ -1472,6 +1492,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6118845801427635132, guid: ae71f6a8906fd324a9cfd375c8746506,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ae71f6a8906fd324a9cfd375c8746506, type: 3}
