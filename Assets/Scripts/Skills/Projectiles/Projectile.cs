@@ -7,6 +7,7 @@ namespace Skills.Projectiles
     {
         [SerializeField] protected GameObject shootParticle;
         [SerializeField] protected GameObject hitParticle;
+        [SerializeField] protected AudioClip hitSound;
         public GameObject shooter;
       
 

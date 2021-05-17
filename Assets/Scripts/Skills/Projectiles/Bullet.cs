@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using DefaultNamespace;
 using UnityEngine;
 using DG.Tweening;
 using Skills.Projectiles;
@@ -50,10 +51,15 @@ public class Bullet : Projectile
         var hitpoint = other.contacts[0].point;
         particle.transform.position = hitpoint;
         particle.transform.LookAt(hitpoint + other.contacts[0].normal * 100f);
-        Destroy(particle,3);
         
+        Destroy(particle,3);
+
+        var collidedSound = other.gameObject.GetComponent<HitSound>();
+        AudioSource.PlayClipAtPoint(collidedSound ? collidedSound.hitSound : hitSound, transform.position);
+
         if(other.gameObject.GetComponent<CharacterStats>() != null)
         {
+
             var rand = UnityEngine.Random.Range(0f, 1f);
             bool isCrit = rand < shooter.GetComponent<CharacterStats>().critChance;
         
