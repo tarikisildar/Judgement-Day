@@ -29,10 +29,7 @@ namespace Managers
 
         private void Update()
         {
-            if (Input.GetKeyUp(KeyCode.N))
-            {
-                RoundManager.Instance.EndRound();
-            }
+
         }
 
         private void WaitAndTakeInput()

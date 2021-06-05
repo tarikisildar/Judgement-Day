@@ -7,11 +7,7 @@ namespace UI
     public class ScaleFadeHandler : FadeHandler
     {
         private Vector3? scale = null;
-        private void Awake()
-        {
-            scale = transform.localScale;
 
-        }
 
         public override void FadeIn(float fadeDelay)
         {
@@ -21,11 +17,12 @@ namespace UI
 
             transform.localScale = Vector3.zero;
 
-            transform.DOScale(scale.Value, 0.25f);
+            transform.DOScale(scale.Value, 0.25f).SetDelay(fadeDelay);
         }
 
         public override void FadeOut()
         {
+            
             transform.DOScale(Vector3.zero, 0.25f).OnComplete(() => gameObject.SetActive(false));
             
         }

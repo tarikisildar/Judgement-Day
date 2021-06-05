@@ -52,7 +52,7 @@ namespace UI
 
         public void ShowUserNameCanvas()
         {
-            userNameCanvas.GetComponent<FadeHandler>().FadeIn(0);
+            userNameCanvas.GetComponent<FadeHandler>().FadeIn(0.5f);
         }
 
         public void HideUserNameCanvas()
