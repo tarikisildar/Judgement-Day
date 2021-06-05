@@ -17,7 +17,10 @@ public static class Constants
     //PlayerPrefs
     public const string MapKey = "Map";
     public const string PlayerKey = "Player";
-    
+    public const string UserNameKey = "UserName";
+    public const string SoundKey = "Sound";
+    public const string HapticKey = "Haptic";
+        
     //Tags
     public const string SpawnPositionTag = "SpawnPosition";
     public const string ProjectileTag = "Projectile";
@@ -27,6 +30,7 @@ public static class Constants
     public const string CharacterRunDirectionXFloat = "DirectionX";
     public const string CharacterRunDirectionYFloat = "DirectionY";
     public const string CharacterDieTrigger = "Die";
+    public const string CharacterDanceBool = "Dance";
     
     
     //Event Time Delays
@@ -41,7 +45,7 @@ public static class Constants
     //Round Values
     public static int RoundCount = 3;
     public static float[] RoundLengths = {10,10,10};
-    public static int SkillSelectionTime = 5;
+    public static int SkillSelectionTime = 10;
     public static int RoundEndTime =7;
     public static int GameEndTime = 8;
     private static readonly SkillType[] FirstRoundTypes = {SkillType.Base, SkillType.Base, SkillType.Base};
@@ -49,6 +53,14 @@ public static class Constants
     private static readonly SkillType[] ThirdRoundTypes = {SkillType.Defence, SkillType.Attack, SkillType.Special};
     public static SkillType[][] RoundSkillTypes = {FirstRoundTypes, SecondRoundTypes, ThirdRoundTypes};
     public static int RespawnTime = 3;
+    
+    
+    //Greetings
+    public static string StrangerGreeting = "Hello Stranger";
+    public static string NewUserGreeting = "Nice To Meet You ";
+    public static string WelcomeBackGreeting = "Welcome Back ";
+    
+
 
 
 }

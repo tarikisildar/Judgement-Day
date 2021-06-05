@@ -6,11 +6,8 @@ namespace UI
     public class FadeHandler : MonoBehaviour
     {
         private CanvasGroup canvasGroup;
-
-
-
-
-        public void FadeIn(float fadeDelay)
+        
+        public virtual void FadeIn(float fadeDelay)
         {
             canvasGroup = GetComponent<CanvasGroup>();
             gameObject.SetActive(true);
@@ -21,7 +18,7 @@ namespace UI
         }
 
 
-        public void FadeOut()
+        public virtual void FadeOut()
         {
             canvasGroup = GetComponent<CanvasGroup>();
             canvasGroup.interactable = false;

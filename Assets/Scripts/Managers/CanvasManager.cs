@@ -12,18 +12,17 @@ namespace Managers
         [SerializeField] private Canvas pauseMenuCanvas;
         [SerializeField] private Canvas skillSelectionCanvas;
         [SerializeField] private Canvas roundEndingCanvas;
+        [SerializeField] private Canvas characterChooseCanvas;
 
 
         private void Awake()
         {
             GameManager.Instance.GoToMainMenuEvent += HideGameCanvas;
             GameManager.Instance.GoToMainMenuEvent += HideLevelFinishCanvas;
-            GameManager.Instance.GoToMainMenuEvent += HidePauseMenuCanvas;
             GameManager.Instance.GoToMainMenuEvent += ShowMainMenuCanvas;
 
             GameManager.Instance.StartGameEvent += HideMainMenuCanvas;
             GameManager.Instance.StartGameEvent += HideLevelFinishCanvas;
-            GameManager.Instance.StartGameEvent += HidePauseMenuCanvas;
             
             
             RoundManager.Instance.StartRoundEvent+= ShowGameCanvas;
@@ -61,8 +60,10 @@ namespace Managers
         
         public void ShowMainMenuCanvas()
         {
+            var mmCanvas = mainMenuCanvas.GetComponent<MainMenuCanvas>();
+            if(!PlayerPrefs.HasKey(Constants.UserNameKey)) mmCanvas.ShowUserNameCanvas(); 
             mainMenuCanvas.GetComponent<FadeHandler>().FadeIn(0.5F);
-            mainMenuCanvas.GetComponent<MainMenuCanvas>().Initialize();
+            mmCanvas.Initialize();
         }
 
 
@@ -148,6 +149,18 @@ namespace Managers
         public void HideRoundEndingCanvas()
         {
             roundEndingCanvas.GetComponent<FadeHandler>().FadeOut();
+        }
+
+        public void ShowCharacterChooseCanvas()
+        {
+            characterChooseCanvas.GetComponent<ChangeCharacterCanvas>().Initialize();
+            characterChooseCanvas.GetComponent<FadeHandler>().FadeIn(1f);
+        }
+
+        public void HideCharacterChooseCanvas()
+        {
+            characterChooseCanvas.GetComponent<FadeHandler>().FadeOut();
+
         }
         
         

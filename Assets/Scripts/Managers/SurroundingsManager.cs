@@ -21,6 +21,9 @@ namespace Managers
         public List<SkillMain> mainPlayerSkills = new List<SkillMain>();
         private List<GameObject> otherPlayers = new List<GameObject>();
         
+        public delegate void PlayerChoosingDelegate();
+        public event PlayerChoosingDelegate PlayerChoosingEvent;
+
 
         private void Awake()
         {
@@ -64,16 +67,35 @@ namespace Managers
             }
             
             GameManager.Instance.PlayerSpawned();
-            //mainPlayer.GetComponent<Rigidbody>().centerOfMass = new Vector3(0,-0.2f,0f);
-            
-            //var skillObj  = Resources.Load(Constants.SkillDataPath + "FireProjectileSkill") as GameObject;
-
-            //playerController.AddSkill(SkillSlots.Base,skillObj);
-            //playerController.AddSkill(SkillSlots.Extra1,playerController.gameObject.AddComponent<TeleportSkill>());
-            //playerController.AddSkill(SkillSlots.Extra1,playerController.gameObject.AddComponent<ShieldSkill>());
-            //playerController.AddSkill(SkillSlots.Extra2,playerController.gameObject.AddComponent<AOESkill>());
-            
         }
+
+        public void CreatePlayerForChoosing(Characters chosenCharacter)
+        {
+            DestroyPlayerAfterChoosing();
+            var playerPrefab =
+                Resources.Load(Constants.CharactersPath + Enum.GetName(typeof(Characters), chosenCharacter)) as GameObject;
+            mainPlayer = Instantiate(playerPrefab, universeTransform);
+
+            GameManager.Instance.PlayerSpawned();
+            SpawnPositionRandom();
+            mainPlayer.transform.LookAt(mainPlayer.transform.position - Vector3.forward);
+            var animator = mainPlayer.GetComponentInChildren<Animator>();
+            animator.SetBool(Constants.CharacterDanceBool,true);
+
+            PlayerChoosingEvent?.Invoke();
+
+
+        }
+        
+
+        public void DestroyPlayerAfterChoosing()
+        {
+            if (mainPlayer)
+            {
+                Destroy(mainPlayer);
+            }
+        }
+        
 
         public void Respawn()
         {
@@ -111,11 +133,13 @@ namespace Managers
 
         private void GoToMainMenu()
         {
-            LoadEnvironment(Maps.Standard);
+            Maps map = (Maps)PlayerPrefs.GetInt(Constants.MapKey, 0);
+
+            LoadEnvironment(map);
             mainPlayerSkills.Clear();
         }
 
-        private void LoadEnvironment(Maps map)
+        public void LoadEnvironment(Maps map)
         {
             if (CurrentEnvironment != null)
             {

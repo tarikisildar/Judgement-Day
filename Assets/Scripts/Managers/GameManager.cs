@@ -26,6 +26,7 @@ namespace Managers
 
         private void Start()
         {
+            AudioListener.pause = PlayerPrefs.GetInt(Constants.SoundKey, 1) == 0;
             GoToMainMenu();
         }
 
