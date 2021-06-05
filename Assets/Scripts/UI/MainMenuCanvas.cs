@@ -25,7 +25,7 @@ namespace UI
 
         public void StartGame()
         {
-            GameManager.Instance.StartGame();
+            GameManager.Instance.StartGame(); //TODO: Matchmaking interface
         }
 
         public void ChangeMap()
@@ -53,6 +53,7 @@ namespace UI
         public void ShowUserNameCanvas()
         {
             userNameCanvas.GetComponent<FadeHandler>().FadeIn(0.5f);
+            userNameCanvas.GetComponent<UserNamePanel>().Initialize();
         }
 
         public void HideUserNameCanvas()

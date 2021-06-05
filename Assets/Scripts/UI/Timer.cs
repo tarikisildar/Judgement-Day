@@ -9,7 +9,7 @@ public class Timer : MonoBehaviour
     private TextMeshProUGUI text;
     private bool active = false;
     private float time = 0f;
-    
+    //PhotonNetwork.ServerTimestamp
     private void Awake()
     {
         text = GetComponent<TextMeshProUGUI>();

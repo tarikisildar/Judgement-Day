@@ -11,7 +11,7 @@ namespace UI
         [SerializeField] private Button okButton;
         [SerializeField] private TMP_InputField nameField;
 
-        private void Initialize()
+        public void Initialize()
         {
             okButton.interactable = false;
         }
@@ -23,7 +23,7 @@ namespace UI
 
         public void SetUserName()
         {
-            PlayerPrefs.SetString(Constants.UserNameKey,nameField.text);
+            PlayerPrefs.SetString(Constants.UserNameKey,nameField.text); //TODO : PhotonNetwork Nickname
             var mainMenu = transform.parent.GetComponent<MainMenuCanvas>();
             mainMenu.HideUserNameCanvas();
             mainMenu.SetGreeting(GreetingType.NewUser);

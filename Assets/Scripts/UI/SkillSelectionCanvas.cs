@@ -1,9 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using DG.Tweening;
 using Enums;
 using Managers;
 using Skills;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -15,6 +17,7 @@ namespace UI
     {
         [SerializeField] private SkillSelection[] skills;
         [SerializeField] private Button applyButton;
+        [SerializeField] private TextMeshProUGUI hintText;
         private CharacterController controller;
         private SkillSelection selected = null;
         private int nextSlotIx = 0;
@@ -58,7 +61,12 @@ namespace UI
                 skillSelection.Initialize(skillScripts[ix]);
             }
             applyButton.interactable = false;
+            hintText.transform.DOMove(hintText.transform.position + Vector3.up * 200, 1f).SetDelay(1.5f);
+            hintText.transform.DOMove(hintText.transform.position, 1f).SetDelay(Constants.SkillSelectionTime-1.5f);
+
         }
+        
+        
         
 
         public void SelectSkill()
@@ -88,6 +96,7 @@ namespace UI
             }
             selected.SetSkill(controller,(SkillSlots)nextSlotIx);
             nextSlotIx++;
+
         }
         
     }
