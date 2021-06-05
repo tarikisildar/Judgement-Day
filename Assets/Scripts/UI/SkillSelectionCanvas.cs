@@ -17,31 +17,41 @@ namespace UI
         [SerializeField] private Button applyButton;
         private CharacterController controller;
         private SkillSelection selected = null;
-        private int nextSlotIx = 1;
+        private int nextSlotIx = 0;
+        private bool locked = false;
 
         public override void Initialize()
         {
             base.Initialize();
             StartCoroutine(WaitForInitialize());
-
         }
 
         IEnumerator WaitForInitialize()
         {
             yield return new WaitForSeconds(Constants.FirstBatch);
-            var skillPool = Resources.LoadAll<GameObject>(Constants.SkillDataPath);
+            locked = false;
+            var skillPool = Resources.LoadAll<GameObject>(Constants.SkillDataPath).ToList();
             controller = SurroundingsManager.Instance.mainPlayer.GetComponent<CharacterController>();
-
+            skillPool.Shuffle();
+            
             List<SkillMain> skillScripts = new List<SkillMain>();
-            foreach (var skillPoolElement in skillPool)
+            foreach (var roundSkillType in Constants.RoundSkillTypes[RoundManager.Instance.CurrentRound])
             {
-                var skillMain = skillPoolElement.GetComponent<SkillMain>();
-                if(controller.skills.Any(s => s.skillData == skillMain.skillData)) continue;
+                foreach (var skillPoolElement in skillPool)
+                {
+                    var skillMain = skillPoolElement.GetComponent<SkillMain>();
+                    if(roundSkillType != skillMain.skillData.skillType) continue;
 
-                skillScripts.Add(skillMain);
-                
+                    if(controller.skills.Any(s => s.skillData == skillMain.skillData)) continue;
+
+                    skillScripts.Add(skillMain);
+
+                    skillPool.Remove(skillPoolElement);
+                    break;
+
+                }
             }
-            skillScripts.Shuffle();
+            
 
             foreach (var (skillSelection,ix) in skills.WithIndex())
             {
@@ -53,6 +63,7 @@ namespace UI
 
         public void SelectSkill()
         {
+            if(locked) return;
             foreach (var skillSelection in skills)
             {
                 skillSelection.UnSelect();
@@ -63,13 +74,20 @@ namespace UI
             applyButton.interactable = true;
         }
 
+        public void Lock()
+        {
+            applyButton.interactable = false;
+            locked = true;
+        }
+
         public void Apply()
         {
-            
-            selected.SetSkill( controller,(SkillSlots)nextSlotIx);
+            if (!selected)
+            {
+                selected = skills[Random.Range(0, skills.Length)];
+            }
+            selected.SetSkill(controller,(SkillSlots)nextSlotIx);
             nextSlotIx++;
-            applyButton.interactable = false;
-            CanvasManager.Instance.HideSkillSelectionCanvas();
         }
         
     }

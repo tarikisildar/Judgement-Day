@@ -10,18 +10,24 @@ namespace Controllers
     {
         [SerializeField] private CinemachineVirtualCamera playerCam;
         [SerializeField] private CinemachineVirtualCamera emptyCam;
+        [SerializeField] private CinemachineVirtualCamera watchGameCam;
         private CinemachineBrain brain;
 
         private void Awake()
         {
             brain = GetComponent<CinemachineBrain>();
+            RoundManager.Instance.EndRoundEvent += LockEmpty;
             GameManager.Instance.GoToMainMenuEvent += LockEmpty;
-            GameManager.Instance.StartGameEvent += LockOnPlayer;
+            GameManager.Instance.PlayerSpawnedEvent += LockOnPlayer;
+            GameManager.Instance.PlayerDiedEvent += WatchGame;
         }
 
         private void LockOnPlayer()
         {
             playerCam.Priority = 11;
+            watchGameCam.Priority = 10;
+            emptyCam.Priority = 10;
+
             StartCoroutine(WaitForLocking());
         }
 
@@ -34,7 +40,17 @@ namespace Controllers
         
         private void LockEmpty()
         {
-            playerCam.Priority = 9;
+            playerCam.Priority = 10;
+            emptyCam.Priority = 11;
+            watchGameCam.Priority = 10;
+
+        }
+
+        private void WatchGame()
+        {
+            watchGameCam.Priority = 11;
+            playerCam.Priority = 10;
+            emptyCam.Priority = 10;
         }
         
     }

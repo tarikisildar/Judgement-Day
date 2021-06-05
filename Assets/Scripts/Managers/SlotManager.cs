@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using Enums;
 using Skills;
 using UI;
@@ -14,10 +15,19 @@ namespace Managers
         
         private void Awake()
         {
-            GameManager.Instance.StartGameEvent += Initialize;
+            RoundManager.Instance.StartRoundEvent += Initialize;
+            GameManager.Instance.GoToMainMenuEvent += Clear;
+        }
+
+        private void Clear()
+        {
+            foreach (var button in buttons)
+            {
+                button.Clear();
+            }
         }
         
-        public void Initialize()
+        private void Initialize()
         {
             foreach (var button in buttons)
             {
@@ -27,7 +37,14 @@ namespace Managers
 
         public void AddSkill(SkillMain skill)
         {
+            StartCoroutine(WaitForAddSkill(skill));
+        }
+
+        private IEnumerator WaitForAddSkill(SkillMain skill)
+        {
+            yield return new WaitForSeconds(Constants.SecondBatch);
             slots[(int)skill.slot].AddSkill(skill);
+
         }
     }
 }

@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 5698436806880805200}
   - component: {fileID: 6068714550041290717}
   m_Layer: 0
-  m_Name: Bullet
+  m_Name: FrostBullet
   m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -187,6 +187,21 @@ PrefabInstance:
     - target: {fileID: 4384795825879374, guid: ac9b4353d2875904fab1331e17aeb084, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 198285934277540912, guid: ac9b4353d2875904fab1331e17aeb084,
+        type: 3}
+      propertyPath: InitialModule.startColor.maxColor.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 198285934277540912, guid: ac9b4353d2875904fab1331e17aeb084,
+        type: 3}
+      propertyPath: InitialModule.startColor.maxColor.g
+      value: 0.43053007
+      objectReference: {fileID: 0}
+    - target: {fileID: 198285934277540912, guid: ac9b4353d2875904fab1331e17aeb084,
+        type: 3}
+      propertyPath: InitialModule.startColor.maxColor.b
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 82270442419296012, guid: ac9b4353d2875904fab1331e17aeb084, type: 3}

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using Controllers.Character;
+using Managers;
 using UnityEngine;
 using UnityEngine.UI;
 using CharacterController = Controllers.CharacterController;
@@ -62,24 +63,28 @@ public class CharacterStats : MonoBehaviour
         DamagePopup.Create(transform.position+Vector3.up/2, damageAmount,isCrit);
     }
 
-    private void Die()
+    protected virtual void Die()
     {
         Destroy(GetComponent<CharacterController>());
         
         animator.SetTrigger(Constants.CharacterDieTrigger);
         isDead = true;
         StartCoroutine(DestroyThis(2f));
+        GameManager.Instance.PlayerDied();
 
     }
 
-    IEnumerator DestroyThis(float wTime)
+    protected virtual IEnumerator DestroyThis(float wTime)
     {
         yield return new WaitForSeconds(wTime);
         
+
         GameObject graveObj = Instantiate(grave,transform.position,transform.rotation);
         graveObj.transform.position = new Vector3(transform.position.x,0.1f,transform.position.z);
 
         Destroy(gameObject);
         
     }
+
+
 }

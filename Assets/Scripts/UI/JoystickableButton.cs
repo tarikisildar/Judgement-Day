@@ -19,7 +19,7 @@ namespace UI
         private GameObject handleButton;
         private bool disabled = true;
 
-        private SkillMain skill;
+        private SkillMain skill = null;
         private GameObject disablePanel;
         private float rangeReminder = 0;
 
@@ -52,6 +52,22 @@ namespace UI
             }
         }
 
+        public void Clear()
+        {
+            try
+            {
+                icon.sprite = null;
+                isJoystickable = true;
+                disabled = true;
+                skill = null;
+                rangeReminder = 0;
+            }
+            catch (Exception e)
+            {
+                // ignored
+            }
+        }
+
         public void AddSkill(SkillMain skillMain)
         {
             skill = skillMain;
@@ -72,6 +88,7 @@ namespace UI
             disablePanel = transform.Find("Disable").gameObject;
 
             rangeReminder = HandleRange;
+
             SetDisable(true);
             base.Initialize();
         }
@@ -103,6 +120,7 @@ namespace UI
 
         public override void OnPointerUp(PointerEventData eventData)
         {
+            if(!InputManager.Instance.takeInput) return;
             if (!disabled)
             {
                 skill.Action(SurroundingsManager.Instance.mainPlayer);
