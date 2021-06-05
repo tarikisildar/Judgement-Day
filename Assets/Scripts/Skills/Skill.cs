@@ -12,5 +12,6 @@ namespace Skills
         public GameObject projectile;
         public float coolDownTime;
         public Sprite icon;
+        public SkillType skillType;
     }
 }

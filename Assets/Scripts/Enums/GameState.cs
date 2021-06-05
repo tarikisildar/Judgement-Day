@@ -2,6 +2,12 @@
 {
     public enum GameState
     {
-        MainMenu, Pause, Finish, Game
+        MainMenu, GameFinish, Game
     }
+
+    public enum RoundState
+    {
+        NotStarted,SkillSelection, Round, RoundFinish 
+    }
+    
 }

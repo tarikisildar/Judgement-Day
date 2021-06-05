@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: -4501095349752164492}
   - component: {fileID: 2572285507254889790}
   m_Layer: 0
-  m_Name: Bullet
+  m_Name: FireBullet
   m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -126,7 +126,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3843173dd443c274bb93ddf75cd63c10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shootParticle: {fileID: 3155174720604645443, guid: 37caa06b3f03fcc48a697e7c106b66e4,
+  shootParticle: {fileID: 3155174720604645443, guid: 6e18e6bb3a0283f4ba26d9980a9750d4,
     type: 3}
   hitParticle: {fileID: 6506320822811729304, guid: 71f5cc4548501c048b80462a88c46218,
     type: 3}

@@ -10,17 +10,29 @@ namespace Managers
 
         private void Awake()
         {
-            GameManager.Instance.StartGameEvent += WaitAndTakeInput;
-            GameManager.Instance.GoToMainMenuEvent += DontTakeInput;
+            RoundManager.Instance.StartRoundEvent += WaitAndTakeInput;
+            RoundManager.Instance.EndRoundEvent += DontTakeInput;
+            GameManager.Instance.PlayerDiedEvent += DontTakeInput;
         }
 
-        private void DontTakeInput()
+        public void DontTakeInput()
         {
+            CanvasManager.Instance.ControlInput(false);
             takeInput = false;
         }
-        private void TakeInput()
+        public void TakeInput()
         {
+            CanvasManager.Instance.ControlInput(true);
+
             takeInput = true;
+        }
+
+        private void Update()
+        {
+            if (Input.GetKeyUp(KeyCode.N))
+            {
+                RoundManager.Instance.EndRound();
+            }
         }
 
         private void WaitAndTakeInput()

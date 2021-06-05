@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Enums;
+using UnityEngine;
 
 public static class Constants
 {
@@ -36,4 +37,18 @@ public static class Constants
     
     //Colors
     public static Color Gold = new Color(0.84f,0.70f,0.40f);
+    
+    //Round Values
+    public static int RoundCount = 3;
+    public static float[] RoundLengths = {10,10,10};
+    public static int SkillSelectionTime = 5;
+    public static int RoundEndTime =7;
+    public static int GameEndTime = 8;
+    private static readonly SkillType[] FirstRoundTypes = {SkillType.Base, SkillType.Base, SkillType.Base};
+    private static readonly SkillType[] SecondRoundTypes = {SkillType.Defence, SkillType.Attack, SkillType.Special};
+    private static readonly SkillType[] ThirdRoundTypes = {SkillType.Defence, SkillType.Attack, SkillType.Special};
+    public static SkillType[][] RoundSkillTypes = {FirstRoundTypes, SecondRoundTypes, ThirdRoundTypes};
+    public static int RespawnTime = 3;
+
+
 }

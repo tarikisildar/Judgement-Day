@@ -106,5 +106,7 @@ namespace Controllers
             skills.Add(skillMain);
             SlotManager.Instance.AddSkill(skillMain);
         }
+
+     
     }
 }

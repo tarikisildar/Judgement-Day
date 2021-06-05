@@ -41,6 +41,7 @@ namespace UI
 
         public void SetSkill(CharacterController controller,SkillSlots slot)
         {
+            SurroundingsManager.Instance.mainPlayerSkills.Add(skillMain);
             controller.AddSkill(slot,skillMain.gameObject);
         }
     }

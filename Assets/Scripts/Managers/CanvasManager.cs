@@ -11,6 +11,7 @@ namespace Managers
         [SerializeField] private Canvas levelFinishCanvas;
         [SerializeField] private Canvas pauseMenuCanvas;
         [SerializeField] private Canvas skillSelectionCanvas;
+        [SerializeField] private Canvas roundEndingCanvas;
 
 
         private void Awake()
@@ -23,8 +24,15 @@ namespace Managers
             GameManager.Instance.StartGameEvent += HideMainMenuCanvas;
             GameManager.Instance.StartGameEvent += HideLevelFinishCanvas;
             GameManager.Instance.StartGameEvent += HidePauseMenuCanvas;
-            GameManager.Instance.StartGameEvent += ShowGameCanvas;
-            GameManager.Instance.StartGameEvent += ShowSkillSelectionCanvas;
+            
+            
+            RoundManager.Instance.StartRoundEvent+= ShowGameCanvas;
+            RoundManager.Instance.StartRoundEvent += ShowSkillSelectionCanvas;
+            RoundManager.Instance.StartRoundEvent += HideLevelFinishCanvas;
+            
+            RoundManager.Instance.EndRoundEvent += HideGameCanvas;
+            RoundManager.Instance.EndRoundEvent += ShowLevelFinishCanvas;
+
         }
 
         public GameCanvas GetGameCanvas()
@@ -114,7 +122,32 @@ namespace Managers
 
         public void HideSkillSelectionCanvas()
         {
+            skillSelectionCanvas.GetComponent<SkillSelectionCanvas>().Apply();
             skillSelectionCanvas.GetComponent<FadeHandler>().FadeOut();
+        }
+
+        public void ControlInput(bool on)
+        {
+            gameCanvas.GetComponent<GameCanvas>().TurnInput(on);
+        }
+
+        public void ShowDiedCanvas(float respawnTime)
+        {
+            gameCanvas.GetComponent<GameCanvas>().YouDiedActivate(respawnTime);
+        }
+        public void HideDiedCanvas()
+        {
+            gameCanvas.GetComponent<GameCanvas>().YouDiedDeactivate();
+        }
+
+        public void ShowRoundEndingCanvas(int round, float timeToNextStage)
+        {
+            roundEndingCanvas.GetComponent<RoundEndingUI>().Initialize(round,timeToNextStage);
+        }
+
+        public void HideRoundEndingCanvas()
+        {
+            roundEndingCanvas.GetComponent<FadeHandler>().FadeOut();
         }
         
         

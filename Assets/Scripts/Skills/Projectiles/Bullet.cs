@@ -70,7 +70,6 @@ public class Bullet : Projectile
         }
 
         
-        
         var normal = other.contacts[0].normal * 100f;
         normal.y = 0;
         transform.LookAt(transform.position + normal );
