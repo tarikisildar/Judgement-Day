@@ -1,9 +1,10 @@
 ﻿using System;
 using UnityEngine;
+using Photon.Pun;
 
 namespace Skills.Projectiles
 {
-    public class Projectile : MonoBehaviour
+    public class Projectile : MonoBehaviourPun
     {
         [SerializeField] protected GameObject shootParticle;
         [SerializeField] protected GameObject hitParticle;

@@ -3,6 +3,7 @@ using System.Collections;
 using Enums;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Photon.Pun;
 
 namespace Managers
 {
@@ -50,8 +51,15 @@ namespace Managers
 
         public void StartGame()
         {
-            gameState = GameState.Game;
-            StartGameEvent?.Invoke();
+            if(NetworkManager.gameReady == true)
+            {
+                gameState = GameState.Game;
+                StartGameEvent?.Invoke();
+            }
+            else
+            {
+                NetworkManager.FindRoom();
+            }
             //RoundManager.Instance.StartRound();
 
         }

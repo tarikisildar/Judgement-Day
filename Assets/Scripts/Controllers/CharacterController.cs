@@ -2,10 +2,11 @@
 using Enums;
 using Skills;
 using UnityEngine;
+using Photon.Pun;
 
 namespace Controllers
 {
-    public class CharacterController : MonoBehaviour
+    public class CharacterController : MonoBehaviourPun
     {
         public List<SkillMain> skills { get; private set; } = new List<SkillMain>();
 

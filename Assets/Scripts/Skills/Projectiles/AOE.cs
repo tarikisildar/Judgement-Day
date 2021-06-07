@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Controllers;
 using Skills.Projectiles;
+using Photon.Pun;
 
 public class AOE : Projectile
 {
@@ -20,8 +21,12 @@ public class AOE : Projectile
     void Update()
     {
         lifeTimer -= Time.deltaTime;
-        if(lifeTimer<=0f) {
-            Destroy(gameObject);
+        if(photonView.IsMine)
+        {
+            if (lifeTimer <= 0f)
+            {
+                PhotonNetwork.Destroy(gameObject);
+            }
         }
     }
 
@@ -32,11 +37,21 @@ public class AOE : Projectile
         {
             var rand = Random.Range(0f, 1f);
             bool isCrit =  rand< shooter.GetComponent<CharacterStats>().critChance;
-            other.gameObject.GetComponent<CharacterStats>().TakeDamage(damage+ Random.Range(-1,2),isCrit);
+            if(photonView.IsMine)
+            {
+                other.gameObject.GetComponent<PhotonView>().RPC("TakeDamageFromClient", RpcTarget.AllViaServer, damage + UnityEngine.Random.Range(-1, 2), isCrit);
+            }
+            //other.gameObject.GetComponent<CharacterStats>().TakeDamageFromClient(damage+ Random.Range(-1,2),isCrit);
             var particle = Instantiate(hitParticle, other.transform);
             particle.transform.position = other.transform.position;
-            Destroy(particle,2);
+            StartCoroutine(DestroyParticle(particle));
         }
+    }
+
+    IEnumerator DestroyParticle(GameObject particle)
+    {
+        yield return new WaitForSeconds(2f);
+        Destroy(particle, 2);
     }
     
 }

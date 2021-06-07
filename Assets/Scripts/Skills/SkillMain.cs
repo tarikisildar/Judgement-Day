@@ -3,10 +3,11 @@ using System;
 using Controllers;
 using Enums;
 using UnityEngine;
+using Photon.Pun;
 
 namespace Skills
 {
-    public class SkillMain : MonoBehaviour
+    public class SkillMain : MonoBehaviourPunCallbacks
     {
         public Skill skillData;
         public SkillSlots slot;

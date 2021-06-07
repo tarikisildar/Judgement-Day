@@ -6,6 +6,7 @@ using UnityEngine;
 using DG.Tweening;
 using Skills.Projectiles;
 using Random = System.Random;
+using Photon.Pun;
 
 public class Bullet : Projectile
 {
@@ -30,17 +31,15 @@ public class Bullet : Projectile
     {
         transform.position += transform.forward * speed * Time.deltaTime;
         lifeTimer -= Time.deltaTime;
-        if(lifeTimer<=0f) {
-            Destroy(gameObject);
+        if(photonView.IsMine)
+        {
+            if (lifeTimer <= 0f)
+            {
+                PhotonNetwork.Destroy(gameObject);
+            }
         }
     }
 
-    void KnockBack(Collision other)
-    {
-        Debug.Log("KNOCKBACKED");
-        other.transform.GetComponent<Rigidbody>().AddForce(power * transform.forward );
-        //other.gameObject.transform.DOMove(other.transform.position + transform.forward , 1f);
-    }
 
     protected override void Action(Collision other)
     {
@@ -61,11 +60,16 @@ public class Bullet : Projectile
 
             var rand = UnityEngine.Random.Range(0f, 1f);
             bool isCrit = rand < shooter.GetComponent<CharacterStats>().critChance;
-        
-            other.gameObject.GetComponent<CharacterStats>().TakeDamage(damage + UnityEngine.Random.Range(-1,2),isCrit);
-            KnockBack(other);
-            Destroy(gameObject);
-
+            if(photonView.IsMine)
+            {
+                other.gameObject.GetComponent<PhotonView>().RPC("TakeDamageFromClient", RpcTarget.All, damage + UnityEngine.Random.Range(-1, 2), isCrit);
+                other.gameObject.GetComponent<PhotonView>().RPC("KnockBack", RpcTarget.AllViaServer, other.gameObject.GetComponent<PhotonView>().ViewID, transform.forward, power);
+                //other.gameObject.GetComponent<CharacterStats>().TakeDamageFromClient(damage + UnityEngine.Random.Range(-1, 2), isCrit);
+            }            
+            if(photonView.IsMine)
+            {
+                PhotonNetwork.Destroy(gameObject);
+            }
         }
 
         

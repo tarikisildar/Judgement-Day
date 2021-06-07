@@ -4,6 +4,7 @@ using Enums;
 using Managers;
 using Skills;
 using UnityEngine;
+using Photon.Pun;
 
 namespace Controllers
 {
@@ -21,6 +22,10 @@ namespace Controllers
 
         private void Start()
         {
+            if (!photonView.IsMine)
+            {
+                return;
+            }
             rigidbody = GetComponent<Rigidbody>();
             lineRenderer = GetComponentInChildren<LineRenderer>();
             animator = GetComponentInChildren<Animator>();
@@ -28,6 +33,10 @@ namespace Controllers
 
         private void Update()
         {
+            if (!photonView.IsMine)
+            {
+                return;
+            }
             rotationByMovementTimer -= Time.deltaTime;
             KeyBoardInput();
         }
@@ -100,13 +109,16 @@ namespace Controllers
 
         public override void AddSkill(SkillSlots slots, GameObject skillObj)
         {
-            var skillMain = Instantiate(skillObj,transform).GetComponent<SkillMain>();
+            GameObject skill = PhotonNetwork.Instantiate(Constants.SkillDataPath + skillObj.name, transform.position, transform.rotation);
+            var skillMain = skill.GetComponent<SkillMain>();
+            photonView.RPC("setParentSkill", RpcTarget.All, skill.GetComponent<PhotonView>().ViewID);
+            //skillMain.transform.SetParent(transform);
             skillMain.transform.position = transform.position;
             skillMain.slot = slots;
             skills.Add(skillMain);
             SlotManager.Instance.AddSkill(skillMain);
         }
 
-     
+
     }
 }
