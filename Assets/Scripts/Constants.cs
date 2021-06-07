@@ -13,7 +13,9 @@ public static class Constants
     public const string CharactersPath = "Environment/Characters/";
     public const string DamagePopupPath = "Environment/DamagePopup";
     public const string SkillDataPath = "Skills/";
-    
+    public const string SkillPath = "Projectiles/";
+    public const string UniversePath = "Universe/";
+
     //PlayerPrefs
     public const string MapKey = "Map";
     public const string PlayerKey = "Player";
@@ -59,8 +61,10 @@ public static class Constants
     public static string StrangerGreeting = "Hello Stranger";
     public static string NewUserGreeting = "Nice To Meet You ";
     public static string WelcomeBackGreeting = "Welcome Back ";
-    
 
 
+    //Networking
+    public static string GameVersion = "0.1";
+    public static int MaxPlayersPerRoom = 1;
 
 }

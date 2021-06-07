@@ -7,6 +7,7 @@ using Enums;
 using Skills;
 using UI;
 using UnityEngine;
+using Photon.Pun;
 using Random = System.Random;
 
 namespace Managers
@@ -38,7 +39,7 @@ namespace Managers
 
             if (mainPlayer)
             {
-                Destroy(mainPlayer);
+                PhotonNetwork.Destroy(mainPlayer);
             }
             foreach (var enemy in otherPlayers)
             {
@@ -58,7 +59,10 @@ namespace Managers
             Characters chosenCharacter = (Characters)PlayerPrefs.GetInt(Constants.PlayerKey, 0);
             var playerPrefab =
                 Resources.Load(Constants.CharactersPath + Enum.GetName(typeof(Characters), chosenCharacter)) as GameObject;
-            mainPlayer = Instantiate(playerPrefab, universeTransform);
+            string path = Constants.CharactersPath + Enum.GetName(typeof(Characters), chosenCharacter);
+            mainPlayer = PhotonNetwork.Instantiate(path, universeTransform.position, universeTransform.rotation);
+            PhotonView.Get(this).RPC("setPlayerParent", RpcTarget.All, mainPlayer.GetComponent<PhotonView>().ViewID);
+            //mainPlayer.transform.SetParent(universeTransform);
             var playerController =  mainPlayer.AddComponent<PlayerController>();
 
             foreach (var (skillMain,ix) in mainPlayerSkills.WithIndex())
@@ -67,6 +71,14 @@ namespace Managers
             }
             
             GameManager.Instance.PlayerSpawned();
+        }
+
+        [PunRPC]
+        void setPlayerParent(int photonID)
+        {
+            PhotonView pv = PhotonView.Find(1);
+            PhotonView player = PhotonView.Find(photonID);
+            player.transform.SetParent(pv.transform);
         }
 
         public void CreatePlayerForChoosing(Characters chosenCharacter)

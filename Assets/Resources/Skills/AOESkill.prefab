@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2933737464271125029}
   - component: {fileID: 8622731887003314350}
+  - component: {fileID: -3220837297858605165}
   m_Layer: 0
   m_Name: AOESkill
   m_TagString: Untagged
@@ -45,3 +46,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillData: {fileID: 11400000, guid: b8f0e9393aabdc54e83709628f8fbb5d, type: 2}
   slot: 0
+--- !u!114 &-3220837297858605165
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6290382890046967358}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
