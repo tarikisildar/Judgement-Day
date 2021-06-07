@@ -9,7 +9,6 @@ using Random = System.Random;
 
 public class Bullet : Projectile
 {
-    // Start is called before the first frame update
     public float speed = 40f;
     public float lifeDuration = 3f;
     public int damage = 3;

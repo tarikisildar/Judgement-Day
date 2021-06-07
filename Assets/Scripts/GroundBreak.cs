@@ -73,6 +73,7 @@ namespace DefaultNamespace
 
         public void Break()
         {
+            if(broke) return;
             StartCoroutine(Shake(2f));
         }
         
