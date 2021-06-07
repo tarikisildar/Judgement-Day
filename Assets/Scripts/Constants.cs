@@ -66,6 +66,6 @@ public static class Constants
 
     //Networking
     public static string GameVersion = "0.1";
-    public static int MaxPlayersPerRoom = 1;
+    public static int MaxPlayersPerRoom = 2;
 
 }

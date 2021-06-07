@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using Photon.Pun;
 using UnityEngine;
 
 namespace DefaultNamespace
@@ -7,7 +9,13 @@ namespace DefaultNamespace
     {
         private void Start()
         {
-            Destroy(gameObject,5);
+            StartCoroutine(DestroyDelay(5));
+        }
+
+        IEnumerator DestroyDelay(float time)
+        {
+            yield return new WaitForSeconds(time);
+            PhotonNetwork.Destroy(gameObject);
         }
     }
 }

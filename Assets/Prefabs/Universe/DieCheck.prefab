@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6965389623776573679}
   - component: {fileID: 1319209961242034072}
   - component: {fileID: 4692514960029651123}
+  - component: {fileID: 8682457215319801570}
   m_Layer: 0
   m_Name: DieCheck
   m_TagString: Finish
@@ -106,3 +107,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0dc157d77a5f483ea4f32a266d8a4310, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8682457215319801570
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9090387753803086229}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
