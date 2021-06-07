@@ -87,14 +87,14 @@ namespace Controllers
             RaycastHit hit;
             if (Physics.Raycast(transform.position, transform.forward, out hit, trailDistance))
             {
-                lineRenderer.SetPosition(1,new Vector3(hit.point.x,0.1f,hit.point.z));
+                lineRenderer.SetPosition(1,new Vector3(hit.point.x,0.25f,hit.point.z));
             }
             else
             {
                 var point = transform.position + transform.forward * trailDistance;
-                lineRenderer.SetPosition(1, new Vector3(point.x,0.1f,point.z));
+                lineRenderer.SetPosition(1, new Vector3(point.x,0.25f,point.z));
             }
-            lineRenderer.SetPosition(0,new Vector3(transform.position.x,0.1f,transform.position.z));
+            lineRenderer.SetPosition(0,new Vector3(transform.position.x,0.25f,transform.position.z));
 
         }
 

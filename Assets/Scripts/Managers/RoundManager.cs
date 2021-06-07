@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections;
+using System.Linq;
+using DefaultNamespace;
 using UI;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Managers
 {
@@ -20,6 +23,9 @@ namespace Managers
         public delegate void EndRoundDelegate();
         public event EndRoundDelegate EndRoundEvent;
 
+        private float groundBreakTime = 5f;
+        private GroundBreak[] grounds;
+
         private void Awake()
         {
             GameManager.Instance.GoToMainMenuEvent += GoToMainMenu;
@@ -33,10 +39,26 @@ namespace Managers
             roundState = RoundState.NotStarted;
         }
 
-        
+        private void Update()
+        {
+            if (roundState != RoundState.Game || grounds.Length <= 1) return;
+            groundBreakTime -= Time.deltaTime;
+            while (groundBreakTime <= 0)
+            {
+                var ground = grounds[Random.Range(0, grounds.Length)];
+                if (ground.broke) continue;
+                ground.Break();
+                groundBreakTime = Random.Range(4, 7);
+            }
+        }
+
+
         private void StartRound()
         {
             InputManager.Instance.DontTakeInput();
+            groundBreakTime = 5f;
+            
+            
             roundState = RoundState.SkillSelection;
             StartRoundEvent?.Invoke();
             StartCoroutine(WaitForSkillSelection());
@@ -49,7 +71,8 @@ namespace Managers
             InputManager.Instance.TakeInput();
             roundState = RoundState.Game;
             StartCoroutine(WaitForRound());
-
+            grounds = GameObject.FindGameObjectsWithTag(Constants.GroundBreakTag)
+                .Select(k => k.GetComponent<GroundBreak>()).ToArray();
         }
         
         IEnumerator WaitForSkillSelection()

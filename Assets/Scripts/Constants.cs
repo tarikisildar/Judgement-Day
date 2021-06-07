@@ -24,6 +24,7 @@ public static class Constants
     //Tags
     public const string SpawnPositionTag = "SpawnPosition";
     public const string ProjectileTag = "Projectile";
+    public const string GroundBreakTag = "BreakableGround";
     
     //Animation Keys
     public const string CharacterRunAnimBool = "Run";
@@ -44,8 +45,8 @@ public static class Constants
     
     //Round Values
     public static int RoundCount = 3;
-    public static float[] RoundLengths = {10,30,10};
-    public static int SkillSelectionTime = 10;
+    public static float[] RoundLengths = {20,30,10};
+    public static int SkillSelectionTime = 5;
     public static int RoundEndTime =7;
     public static int GameEndTime = 8;
     private static readonly SkillType[] FirstRoundTypes = {SkillType.Base, SkillType.Base, SkillType.Base};

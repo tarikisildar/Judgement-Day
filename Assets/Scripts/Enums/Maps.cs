@@ -2,6 +2,6 @@
 {
     public enum Maps
     {
-        Standard, Desert
+        Standard,Volcano,Arctic
     }
 }

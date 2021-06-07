@@ -6,6 +6,7 @@ TagManager:
   tags:
   - SpawnPosition
   - Projectile
+  - BreakableGround
   layers:
   - Default
   - TransparentFX

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Controllers;
+using DefaultNamespace;
 using Enums;
 using Skills;
 using UI;
@@ -146,10 +147,10 @@ namespace Managers
                 Destroy(CurrentEnvironment);
             }
             
-            
             GameObject envPref = Resources.Load(Constants.EnvironmentsPath + Enum.GetName(typeof(Maps),map)) as GameObject;
             CurrentEnvironment = Instantiate(envPref, universeTransform);
-            
+            RenderSettings.skybox = CurrentEnvironment.GetComponent<Map>().skyBox;
+
             SpawnPositionRandom();
 
             //for (int i = 0; i < otherPlayers.Count; i++)
