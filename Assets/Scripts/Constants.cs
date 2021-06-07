@@ -47,7 +47,11 @@ public static class Constants
     
     //Round Values
     public static int RoundCount = 3;
+<<<<<<< Updated upstream
     public static float[] RoundLengths = {20,30,10};
+=======
+    public static float[] RoundLengths = {5,60,60};
+>>>>>>> Stashed changes
     public static int SkillSelectionTime = 5;
     public static int RoundEndTime =7;
     public static int GameEndTime = 8;
