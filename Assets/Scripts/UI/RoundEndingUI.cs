@@ -9,6 +9,7 @@ public class RoundEndingUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI title;
     [SerializeField] private TextMeshProUGUI timerText;
     [SerializeField] private Timer timer;
+    [SerializeField] private ScorePanel scorePanel;
 
     public void Initialize(int round,float timeToNextStage)
     {
@@ -22,6 +23,12 @@ public class RoundEndingUI : MonoBehaviour
             InitNextRound(round);
         }
         timer.Activate(timeToNextStage);
+        InitScoreBoard();
+    }
+
+    private void InitScoreBoard()
+    {
+        scorePanel.Initialize();
     }
 
     private void InitGameOver()

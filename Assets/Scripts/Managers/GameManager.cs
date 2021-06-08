@@ -4,6 +4,7 @@ using Enums;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Photon.Pun;
+using Photon.Pun.UtilityScripts;
 
 namespace Managers
 {
@@ -58,7 +59,7 @@ namespace Managers
 
             gameState = GameState.Game; 
             StartGameEvent?.Invoke();
-            
+            PhotonNetwork.LocalPlayer.SetScore(0);
             //RoundManager.Instance.StartRound();
 
         }

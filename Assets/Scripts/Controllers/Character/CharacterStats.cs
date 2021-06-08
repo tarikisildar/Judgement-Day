@@ -6,6 +6,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using CharacterController = Controllers.CharacterController;
 using Photon.Pun;
+using Photon.Pun.UtilityScripts;
+using Photon.Realtime;
 
 public class CharacterStats : MonoBehaviourPun
 {
@@ -59,18 +61,29 @@ public class CharacterStats : MonoBehaviourPun
     }
 
     [PunRPC]
-    public void TakeDamageFromClient(int damageAmount, bool isCrit = false)
+    public void TakeDamageFromClient(int damageAmount,int shooterId, bool isCrit = false)
     {
-        Debug.Log("pv 2");
-        TakeDamage(damageAmount, isCrit);
+        if(shooterId == 0) return;
+        var shooter = PhotonView.Find(shooterId).Owner; 
+        TakeDamage(damageAmount, shooter, isCrit);
         //photonView.RPC("TakeDamage", RpcTarget.AllViaServer, damageAmount, isCrit);
     }
 
-    void TakeDamage(int damageAmount,bool isCrit = false)
+    void TakeDamage(int damageAmount,Player shooter,bool isCrit = false)
     {
-        Debug.Log("pv 3");
-        Debug.Log("pv 4");
+
         health -= isCrit ? damageAmount * 2 : damageAmount;
+        if (shooter.UserId != photonView.Owner.UserId)
+        {
+            shooter.AddScore(isCrit ? damageAmount * 2 : damageAmount);
+            if(health < 0){shooter.AddScore(100);}
+        }
+        else
+        {
+            if(health < 0){photonView.Owner.AddScore(-50);}
+
+        }
+            
         DamagePopup.Create(transform.position + Vector3.up / 2, damageAmount, isCrit);
     }
 

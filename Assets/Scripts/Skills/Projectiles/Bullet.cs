@@ -62,7 +62,9 @@ public class Bullet : Projectile
             bool isCrit = rand < shooter.GetComponent<CharacterStats>().critChance;
             if(photonView.IsMine)
             {
-                other.gameObject.GetComponent<PhotonView>().RPC("TakeDamageFromClient", RpcTarget.All, damage + UnityEngine.Random.Range(-1, 2), isCrit);
+                int shooterId = shooter.GetComponent<PhotonView>().ViewID;
+
+                other.gameObject.GetComponent<PhotonView>().RPC("TakeDamageFromClient", RpcTarget.All, damage + UnityEngine.Random.Range(-1, 2),shooterId, isCrit);
                 other.gameObject.GetComponent<PhotonView>().RPC("KnockBack", RpcTarget.AllViaServer, other.gameObject.GetComponent<PhotonView>().ViewID, transform.forward, power);
                 //other.gameObject.GetComponent<CharacterStats>().TakeDamageFromClient(damage + UnityEngine.Random.Range(-1, 2), isCrit);
             }            

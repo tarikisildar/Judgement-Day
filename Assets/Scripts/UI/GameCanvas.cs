@@ -6,6 +6,8 @@ namespace UI
     {
         [SerializeField] private GameObject InputCanvas;
         [SerializeField] private GameObject YouDiedCanvas;
+        [SerializeField] private GameObject scoreBoard;
+        [SerializeField] private GameObject scoreButton;
         public override void Initialize()
         {
             base.Initialize();
@@ -32,6 +34,24 @@ namespace UI
         public void YouDiedDeactivate()
         {
             YouDiedCanvas.GetComponent<FadeHandler>().FadeOut();
+        }
+
+        public void ScoreBoardActive()
+        {
+            scoreBoard.GetComponent<FadeHandler>().FadeIn(0);
+            scoreBoard.GetComponent<ScorePanel>().Initialize();
+            scoreButton.GetComponent<FadeHandler>().FadeOut();
+
+        }
+        
+        public void ScoreBoardDeactive()
+        {
+            scoreBoard.GetComponent<FadeHandler>().FadeOut();
+            scoreButton.SetActive(true);
+            scoreButton.GetComponent<FadeHandler>().FadeIn(0);
+
+
+
         }
         
 

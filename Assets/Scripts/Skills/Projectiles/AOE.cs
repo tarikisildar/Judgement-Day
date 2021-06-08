@@ -39,8 +39,11 @@ public class AOE : Projectile
             bool isCrit =  rand< shooter.GetComponent<CharacterStats>().critChance;
             if(photonView.IsMine)
             {
-                other.gameObject.GetComponent<PhotonView>().RPC("TakeDamageFromClient", RpcTarget.AllViaServer, damage + UnityEngine.Random.Range(-1, 2), isCrit);
+                int givenDamage = damage + Random.Range(-1, 2);
+                int shooterId = shooter.GetComponent<PhotonView>().ViewID;
+                other.gameObject.GetComponent<PhotonView>().RPC("TakeDamageFromClient", RpcTarget.AllViaServer, givenDamage,shooterId, isCrit);
             }
+            
             //other.gameObject.GetComponent<CharacterStats>().TakeDamageFromClient(damage+ Random.Range(-1,2),isCrit);
             var particle = Instantiate(hitParticle, other.transform);
             particle.transform.position = other.transform.position;

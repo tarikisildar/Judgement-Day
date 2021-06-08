@@ -4,6 +4,7 @@ using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 using Managers;
+using Photon.Pun.UtilityScripts;
 using UI;
 
 public class NetworkManager : MonoBehaviourPunCallbacks
@@ -39,6 +40,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
             PhotonNetwork.ConnectUsingSettings();
         }
     }
+
 
     public static void Connect()
     {

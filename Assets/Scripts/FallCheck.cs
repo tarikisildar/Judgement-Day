@@ -10,7 +10,7 @@ namespace DefaultNamespace
         {
             if (other.CompareTag(Constants.PlayerKey) )
             {
-                other.gameObject.GetComponent<PhotonView>().RPC("TakeDamageFromClient", RpcTarget.All, 1000, false);
+                other.gameObject.GetComponent<PhotonView>().RPC("TakeDamageFromClient", RpcTarget.All, 1000,0, false);
             }
         }
     }
