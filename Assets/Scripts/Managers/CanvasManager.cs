@@ -34,23 +34,11 @@ namespace Managers
             
             RoundManager.Instance.EndRoundEvent += HideGameCanvas;
             RoundManager.Instance.EndRoundEvent += ShowLevelFinishCanvas;
-            StartCoroutine(AfterStart());
+            ShowPopUpCanvas();
+            GetPopUpCanvas().ShowConnectingPopUp();
         }
 
-        IEnumerator AfterStart()
-        {
-            yield return new WaitForSeconds(2f);
-            NetworkManager.Connect();
-        }
-
-        private void Update()
-        {
-            if (!PhotonNetwork.IsConnected && !GetPopUpCanvas().gameObject.activeSelf)
-            {
-                ShowPopUpCanvas();
-                GetPopUpCanvas().ShowConnectingPopUp();
-            }
-        }
+        
 
         public GameCanvas GetGameCanvas()
         {
@@ -135,7 +123,13 @@ namespace Managers
         public void ShowSkillSelectionCanvas()
         {
             skillSelectionCanvas.GetComponent<FadeHandler>().FadeIn(0.5F);
-            skillSelectionCanvas.GetComponent<SkillSelectionCanvas>().Initialize();
+            skillSelectionCanvas.GetComponent<SkillSelectionCanvas>().Initialize();        
+        }
+
+        IEnumerator ShowSkillSelectionCanvasDelayed()
+        {
+            yield return new WaitForSeconds(1f);
+            
         }
 
 

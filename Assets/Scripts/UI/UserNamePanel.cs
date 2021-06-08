@@ -1,5 +1,6 @@
 ﻿using System;
 using Managers;
+using Photon.Pun;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -23,7 +24,8 @@ namespace UI
 
         public void SetUserName()
         {
-            PlayerPrefs.SetString(Constants.UserNameKey,nameField.text); //TODO : PhotonNetwork Nickname
+            PlayerPrefs.SetString(Constants.UserNameKey,nameField.text); 
+            PhotonNetwork.NickName = nameField.text;
             var mainMenu = transform.parent.GetComponent<MainMenuCanvas>();
             mainMenu.HideUserNameCanvas();
             mainMenu.SetGreeting(GreetingType.NewUser);

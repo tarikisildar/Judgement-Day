@@ -25,13 +25,15 @@ namespace UI
 
         public void StartGame()
         {
-            GameManager.Instance.StartGame(); //TODO: Matchmaking interface
+            GameManager.Instance.StartGame();
         }
 
         public void SearchGame()
         {
             CanvasManager.Instance.ShowPopUpCanvas();
             CanvasManager.Instance.GetPopUpCanvas().ShowSearchRoomPopUp();
+            NetworkManager.FindRoom();
+
         }
 
         public void ChangeMap()

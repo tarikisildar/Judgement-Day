@@ -48,12 +48,18 @@ namespace Managers
                 Destroy(enemy);
             }
             otherPlayers.Clear();
-            
+
             CreateMainPlayer();
 
             //CreateOtherPlayers();
             
             LoadEnvironmentNetwork(map);
+        }
+
+        IEnumerator CreatePlayerDelayed()
+        {
+            yield return new WaitForSeconds(0.5f);
+            CreateMainPlayer();
         }
 
         private void CreateMainPlayer()
@@ -188,13 +194,14 @@ namespace Managers
             {
                 Destroy(CurrentEnvironment);
             }
-            if (CurrentEnvironmentNetwork != null)
-            {
-                PhotonNetwork.Destroy(CurrentEnvironment);
-            }
             
-            if (!PhotonNetwork.IsMasterClient)
+            
+            if (PhotonNetwork.IsMasterClient)
             {
+                if (CurrentEnvironmentNetwork != null)
+                {
+                    PhotonNetwork.Destroy(CurrentEnvironmentNetwork);
+                }
                 GameObject envPref = Resources.Load(Constants.EnvironmentsPath + Enum.GetName(typeof(Maps),map)) as GameObject;
                 CurrentEnvironmentNetwork = PhotonNetwork.Instantiate(Constants.EnvironmentsPath + Enum.GetName(typeof(Maps),map),universeTransform.position,envPref.transform.rotation);
                 CurrentEnvironmentNetwork.GetComponent<PhotonView>().RPC("SetParent",RpcTarget.All,CurrentEnvironmentNetwork.GetComponent<PhotonView>().ViewID,1);

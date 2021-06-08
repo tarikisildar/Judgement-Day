@@ -28,9 +28,13 @@ namespace Managers
         private void Start()
         {
             AudioListener.pause = PlayerPrefs.GetInt(Constants.SoundKey, 1) == 0;
+            NetworkManager.Connect();
             GoToMainMenu();
         }
-
+        IEnumerator AfterStart()
+        {
+            yield return new WaitForSeconds(2f);
+        }
         public void GoToMainMenu()
         {
             gameState = GameState.MainMenu;
@@ -51,15 +55,10 @@ namespace Managers
 
         public void StartGame()
         {
-            if(NetworkManager.gameReady == true)
-            {
-                gameState = GameState.Game;
-                StartGameEvent?.Invoke();
-            }
-            else
-            {
-                NetworkManager.FindRoom();
-            }
+
+            gameState = GameState.Game; 
+            StartGameEvent?.Invoke();
+            
             //RoundManager.Instance.StartRound();
 
         }

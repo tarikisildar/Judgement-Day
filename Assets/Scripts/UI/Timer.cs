@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class Timer : MonoBehaviour
 {
+    [SerializeField] private String format = "n1";
     private TextMeshProUGUI text;
     private bool active = false;
     private float time = 0f;
@@ -23,7 +24,7 @@ public class Timer : MonoBehaviour
 
     private void Update()
     {
-        text.text = time.ToString("n1");
+        text.text = time.ToString(format);
         if (active && time > 0)
         {
             time = Mathf.Max(time - Time.deltaTime, 0f);

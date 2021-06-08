@@ -18,7 +18,6 @@ namespace UI
         public void ShowConnectingPopUp()
         {
             connecting.GetComponent<FadeHandler>().FadeIn(0.5f);
-            connecting.GetComponent<ConnectingPopUp>().Initialize();
         }
 
         public void HideConnectingPopUp()
@@ -30,7 +29,6 @@ namespace UI
         public void ShowSearchRoomPopUp()
         {
             searchRoom.GetComponent<FadeHandler>().FadeIn(0.5f);
-            searchRoom.GetComponent<SearchRoomPopup>().Initialize();
 
         }
 
@@ -38,6 +36,11 @@ namespace UI
         {
             searchRoom.GetComponent<FadeHandler>().FadeOut();
             GetComponent<FadeHandler>().FadeOut();
+        }
+        public SearchRoomPopup GetSearchRoomPopUp()
+        {
+            return searchRoom.GetComponent<SearchRoomPopup>();
+
         }
 
     }

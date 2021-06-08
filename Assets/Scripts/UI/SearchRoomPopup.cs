@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Managers;
+using Photon.Pun;
 using TMPro;
 using UnityEngine;
 
@@ -8,41 +10,11 @@ namespace UI
 {
     public class SearchRoomPopup : MonoBehaviour
     {
-        private float time;
         [SerializeField] private TextMeshProUGUI title;
         [SerializeField] private GameObject layoutGroup;
         [SerializeField] private GameObject userText;
-        public void Initialize()
-        {
-            time = Time.time;
-        }
+        [SerializeField] private Timer timer;
 
-        private void Update()
-        {
-            if (IsConnected(10))
-            {
-                GameManager.Instance.StartGame();
-                transform.parent.GetComponent<PopupCanvas>().HideSearchRoomPopUp();
-                time = Time.time;
-            }
-            else if (IsConnected(7))
-            {
-                Starting();
-            }
-            else if (IsConnected(3))
-            {
-                WaitingPlayers();
-            }
-            else
-            {
-                Searching();
-            }
-        }
-
-        private bool IsConnected(float t)
-        {
-            return Time.time - time > t; //TODO: connect photon
-        }
 
         public void Searching()
         {
@@ -57,14 +29,11 @@ namespace UI
 
         private List<String> GetUserNames()
         {
-            var userNames = new List<String>();
-            userNames.Add("Ahmet");
-            userNames.Add("Mehmet"); //TODO
-            userNames.Add("Mahmut");
-            return userNames;
+            var players= PhotonNetwork.PlayerList.Select(k => k.NickName).ToList();
+            return players;
         }
 
-        private void SetUserNames()
+        public void SetUserNames()
         {
             foreach (Transform child in layoutGroup.transform)
             {
@@ -83,6 +52,8 @@ namespace UI
         public void Starting()
         {
             title.GetComponent<ThreeDots>().SetOriginalText("Starting");
+            timer.gameObject.SetActive(true);
+            timer.Activate(4);
         }
     }
 }
