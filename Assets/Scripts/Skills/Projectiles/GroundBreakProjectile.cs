@@ -1,5 +1,6 @@
 ﻿using DefaultNamespace;
 using UnityEngine;
+using Photon.Pun;
 
 namespace Skills.Projectiles
 {
@@ -26,7 +27,10 @@ namespace Skills.Projectiles
             transform.position += transform.forward * (speed * Time.deltaTime);
             lifeTimer -= Time.deltaTime;
             if(lifeTimer<=0f) {
-                Destroy(gameObject);
+                if(photonView.IsMine)
+                {
+                    PhotonNetwork.Destroy(gameObject);
+                }
             }
             RaycastHit hit;
             if (Physics.Raycast(transform.position, -transform.up, out hit, 10))

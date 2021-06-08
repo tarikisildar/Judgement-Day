@@ -28,10 +28,10 @@ namespace Skills
             {
                 Debug.Log("test");
                 PhotonView pv = PhotonView.Find(playerID);
-                var projectile = PhotonNetwork.Instantiate(Constants.SkillPath + skillData.projectile.name, Vector3.zero, Quaternion.identity);
+                var projectile = PhotonNetwork.Instantiate(Constants.SkillPath + skillData.projectile.name, new Vector3(transform.position.x, 0.1f, transform.position.z), Quaternion.identity);
                 int procID = projectile.GetComponent<PhotonView>().ViewID;
                 photonView.RPC("SetShooter", RpcTarget.All, procID, playerID);
-                projectile.transform.position = new Vector3(transform.position.x, 0.1f, transform.position.z);
+                //projectile.transform.position = new Vector3(transform.position.x, 0.1f, transform.position.z);
                 //projectile.GetComponent<Projectile>().shooter = player;
             }
         }

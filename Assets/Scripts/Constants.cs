@@ -47,7 +47,7 @@ public static class Constants
     
     //Round Values
     public static int RoundCount = 3;
-    public static float[] RoundLengths = {20,30,10};
+    public static float[] RoundLengths = {5,60,60};
     public static int SkillSelectionTime = 5;
     public static int RoundEndTime =7;
     public static int GameEndTime = 8;
@@ -66,6 +66,6 @@ public static class Constants
 
     //Networking
     public static string GameVersion = "0.1";
-    public static int MaxPlayersPerRoom = 2;
+    public static int MaxPlayersPerRoom = 1;
 
 }
