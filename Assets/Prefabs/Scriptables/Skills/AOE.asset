@@ -19,4 +19,4 @@ MonoBehaviour:
     type: 3}
   coolDownTime: 5
   icon: {fileID: 21300000, guid: f18d13dd8bd4f5b41ad4887f8ecabfc8, type: 3}
-  skillType: 2
+  skillType: 0
