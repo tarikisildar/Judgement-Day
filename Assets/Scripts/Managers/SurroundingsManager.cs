@@ -154,13 +154,15 @@ namespace Managers
 
         public void LoadEnvironment(Maps map)
         {
+            if(!PhotonNetwork.IsMasterClient) return;
             if (CurrentEnvironment != null)
             {
-                Destroy(CurrentEnvironment);
+                PhotonNetwork.Destroy(CurrentEnvironment);
             }
             
             GameObject envPref = Resources.Load(Constants.EnvironmentsPath + Enum.GetName(typeof(Maps),map)) as GameObject;
-            CurrentEnvironment = Instantiate(envPref, universeTransform);
+            CurrentEnvironment = PhotonNetwork.Instantiate(Constants.EnvironmentsPath + Enum.GetName(typeof(Maps),map),universeTransform.position,universeTransform.rotation);
+            CurrentEnvironment.GetComponent<PhotonView>().RPC("SetParent",RpcTarget.All,CurrentEnvironment.GetComponent<PhotonView>().ViewID);
             RenderSettings.skybox = CurrentEnvironment.GetComponent<Map>().skyBox;
 
             SpawnPositionRandom();
@@ -171,6 +173,12 @@ namespace Managers
             //    otherPlayers[i].transform.LookAt(universeTransform.position);
             //    otherPlayers[i].transform.rotation = Quaternion.Euler(0,otherPlayers[i].transform.rotation.eulerAngles.y,0);}
 
+        }
+        [PunRPC]
+        private void SetParent(int id)
+        {
+            var envId = PhotonView.Find(id);
+            envId.transform.SetParent(universeTransform);
         }
 
         private void SpawnPositionRandom()

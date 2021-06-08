@@ -2,13 +2,16 @@
 using System.Collections;
 using System.Linq;
 using DefaultNamespace;
+using ExitGames.Client.Photon;
+using Photon.Pun;
+using Photon.Realtime;
 using UI;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 namespace Managers
 {
-    public class RoundManager : Singleton<RoundManager>
+    public class RoundManager : Singleton<RoundManager>, IOnEventCallback
     {
         public int CurrentRound { get; private set; } = 0;
         
@@ -25,14 +28,71 @@ namespace Managers
 
         private float groundBreakTime = 5f;
         private GroundBreak[] grounds;
+        
+        public const byte StartRoundEventCode = 1;
+        public const byte SkillSelectionOverEventCode = 2;
+        public const byte EndRoundEventCode = 3;
+        public const byte BreakGroundEventCode = 4;
+
 
         private void Awake()
         {
             GameManager.Instance.GoToMainMenuEvent += GoToMainMenu;
-            GameManager.Instance.StartGameEvent += StartRound;
+            GameManager.Instance.StartGameEvent += StartRoundNetworkEvent;
         }
         
+        private void OnEnable()
+        {
+            PhotonNetwork.AddCallbackTarget(this);
+        }
 
+        private void OnDisable()
+        {
+            PhotonNetwork.RemoveCallbackTarget(this);
+        }
+
+        private void StartRoundNetworkEvent()
+        {
+            if (PhotonNetwork.IsMasterClient)
+            {
+                RaiseEventOptions raiseEventOptions = new RaiseEventOptions {Receivers = ReceiverGroup.All};
+                PhotonNetwork.RaiseEvent(StartRoundEventCode, new object[] { }, raiseEventOptions,
+                    SendOptions.SendReliable);
+            }
+        }
+
+        private void SkillSelectionOverNetworkEvent()
+        {
+            if (PhotonNetwork.IsMasterClient)
+            {
+                RaiseEventOptions raiseEventOptions = new RaiseEventOptions {Receivers = ReceiverGroup.All};
+                PhotonNetwork.RaiseEvent(SkillSelectionOverEventCode, new object[] { }, raiseEventOptions,
+                    SendOptions.SendReliable);
+            }
+        }
+        private void EndRoundNetworkEvent()
+        {
+            if (PhotonNetwork.IsMasterClient)
+            {
+                RaiseEventOptions raiseEventOptions = new RaiseEventOptions {Receivers = ReceiverGroup.All};
+                PhotonNetwork.RaiseEvent(EndRoundEventCode, new object[] { }, raiseEventOptions,
+                    SendOptions.SendReliable);
+            }
+        }
+
+        private void BreakGroundEvent()
+        {
+            if (PhotonNetwork.IsMasterClient)
+            {
+                int id = grounds[Random.Range(0, grounds.Length)].GetComponent<PhotonView>().ViewID;
+                object[] content = new object[] { id }; // Array contains the target position and the IDs of the selected units
+
+                RaiseEventOptions raiseEventOptions = new RaiseEventOptions {Receivers = ReceiverGroup.All};
+                PhotonNetwork.RaiseEvent(BreakGroundEventCode, content, raiseEventOptions,
+                    SendOptions.SendReliable);
+            }
+        }
+        
         private void GoToMainMenu()
         {
             CurrentRound = 0;
@@ -43,13 +103,18 @@ namespace Managers
         {
             if (roundState != RoundState.Game || grounds.Length <= 1) return;
             groundBreakTime -= Time.deltaTime;
-            while (groundBreakTime <= 0)
+            if (groundBreakTime <= 0)
             {
-                var ground = grounds[Random.Range(0, grounds.Length)];
-                if (ground.broke) continue;
-                ground.Break();
+                BreakGroundEvent();
                 groundBreakTime = Random.Range(4, 7);
             }
+        }
+
+        private void BreakGround(int rand)
+        {
+            var ground = PhotonView.Find(rand).gameObject.GetComponent<GroundBreak>();
+            if (ground.broke) return;
+            ground.Break();
         }
 
 
@@ -78,7 +143,7 @@ namespace Managers
         IEnumerator WaitForSkillSelection()
         {
             yield return new WaitForSeconds(Constants.SkillSelectionTime);
-            SkillSelectionOver();
+            SkillSelectionOverNetworkEvent();
         }
 
         IEnumerator WaitForRound()
@@ -88,7 +153,7 @@ namespace Managers
             yield return new WaitForSeconds(length);
             CanvasManager.Instance.HideGameCanvas();
             roundState = RoundState.RoundOver;
-            EndRound();
+            EndRoundNetworkEvent();
 
         }
 
@@ -104,10 +169,34 @@ namespace Managers
             CanvasManager.Instance.ShowRoundEndingCanvas(CurrentRound,Constants.RoundEndTime);
             yield return new WaitForSeconds(Constants.RoundEndTime);
             CanvasManager.Instance.HideRoundEndingCanvas();
-            StartRound();
+            StartRoundNetworkEvent();
         }
+        
+        
 
-       
+
+        public void OnEvent(EventData photonEvent)
+        {
+            byte eventCode = photonEvent.Code;
+            switch (eventCode)
+            {
+                case StartRoundEventCode:
+                    StartRound();
+                    break;
+                case SkillSelectionOverEventCode:
+                    SkillSelectionOver();
+                    break;
+                case EndRoundEventCode:
+                    EndRound();
+                    break;
+                case BreakGroundEventCode:
+                    object[] data = (object[])photonEvent.CustomData;
+                    int rand = (int)data[0];
+                    BreakGround(rand);
+                    break;
+            }
+            
+        }
     }
 
     public enum RoundState
