@@ -18,6 +18,7 @@ namespace Managers
         [SerializeField] private Transform universeTransform;
         
         public GameObject CurrentEnvironment { get; private set; }
+        public GameObject CurrentEnvironmentNetwork { get; private set; }
 
         public GameObject mainPlayer { get; private set; }
         public List<SkillMain> mainPlayerSkills = new List<SkillMain>();
@@ -52,7 +53,7 @@ namespace Managers
 
             //CreateOtherPlayers();
             
-            LoadEnvironment(map);
+            LoadEnvironmentNetwork(map);
         }
 
         private void CreateMainPlayer()
@@ -152,17 +153,22 @@ namespace Managers
             mainPlayerSkills.Clear();
         }
 
+
+
         public void LoadEnvironment(Maps map)
         {
-            if(!PhotonNetwork.IsMasterClient) return;
+
             if (CurrentEnvironment != null)
+            {
+                Destroy(CurrentEnvironment);
+            }
+            if (CurrentEnvironmentNetwork != null)
             {
                 PhotonNetwork.Destroy(CurrentEnvironment);
             }
-            
+
             GameObject envPref = Resources.Load(Constants.EnvironmentsPath + Enum.GetName(typeof(Maps),map)) as GameObject;
-            CurrentEnvironment = PhotonNetwork.Instantiate(Constants.EnvironmentsPath + Enum.GetName(typeof(Maps),map),universeTransform.position,universeTransform.rotation);
-            CurrentEnvironment.GetComponent<PhotonView>().RPC("SetParent",RpcTarget.All,CurrentEnvironment.GetComponent<PhotonView>().ViewID);
+            CurrentEnvironment = Instantiate(envPref,universeTransform);
             RenderSettings.skybox = CurrentEnvironment.GetComponent<Map>().skyBox;
 
             SpawnPositionRandom();
@@ -174,12 +180,31 @@ namespace Managers
             //    otherPlayers[i].transform.rotation = Quaternion.Euler(0,otherPlayers[i].transform.rotation.eulerAngles.y,0);}
 
         }
-        [PunRPC]
-        private void SetParent(int id)
+
+
+        public void LoadEnvironmentNetwork(Maps map)
         {
-            var envId = PhotonView.Find(id);
-            envId.transform.SetParent(universeTransform);
+            if (CurrentEnvironment != null)
+            {
+                Destroy(CurrentEnvironment);
+            }
+            if (CurrentEnvironmentNetwork != null)
+            {
+                PhotonNetwork.Destroy(CurrentEnvironment);
+            }
+            
+            if (!PhotonNetwork.IsMasterClient)
+            {
+                GameObject envPref = Resources.Load(Constants.EnvironmentsPath + Enum.GetName(typeof(Maps),map)) as GameObject;
+                CurrentEnvironmentNetwork = PhotonNetwork.Instantiate(Constants.EnvironmentsPath + Enum.GetName(typeof(Maps),map),universeTransform.position,envPref.transform.rotation);
+                CurrentEnvironmentNetwork.GetComponent<PhotonView>().RPC("SetParent",RpcTarget.All,CurrentEnvironmentNetwork.GetComponent<PhotonView>().ViewID,1);
+                RenderSettings.skybox = CurrentEnvironmentNetwork.GetComponent<Map>().skyBox;
+            }
+            
+            SpawnPositionRandom();
         }
+        
+        
 
         private void SpawnPositionRandom()
         {

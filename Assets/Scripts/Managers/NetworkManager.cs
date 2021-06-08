@@ -33,6 +33,12 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         }
     }
 
+    public static void Connect()
+    {
+        PhotonNetwork.GameVersion = Constants.GameVersion;
+        PhotonNetwork.ConnectUsingSettings();
+    }
+
     public void SetUpName()
     {
         if(!PlayerPrefs.HasKey(Constants.PlayerKey)) { return; }

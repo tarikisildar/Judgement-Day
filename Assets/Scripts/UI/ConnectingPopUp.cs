@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using Photon.Pun;
 using UnityEngine;
 
 namespace UI
@@ -22,7 +23,7 @@ namespace UI
 
         private bool IsConnected()
         {
-            return Time.time - time > 3; //TODO: connect photon
+            return PhotonNetwork.IsConnected;
         }
         
         

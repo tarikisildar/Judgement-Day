@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using Photon.Pun;
 using UI;
 using UnityEngine;
 
@@ -32,9 +34,22 @@ namespace Managers
             
             RoundManager.Instance.EndRoundEvent += HideGameCanvas;
             RoundManager.Instance.EndRoundEvent += ShowLevelFinishCanvas;
-            
-            ShowPopUpCanvas();
-            GetPopUpCanvas().ShowConnectingPopUp();
+            StartCoroutine(AfterStart());
+        }
+
+        IEnumerator AfterStart()
+        {
+            yield return new WaitForSeconds(2f);
+            NetworkManager.Connect();
+        }
+
+        private void Update()
+        {
+            if (!PhotonNetwork.IsConnected && !GetPopUpCanvas().gameObject.activeSelf)
+            {
+                ShowPopUpCanvas();
+                GetPopUpCanvas().ShowConnectingPopUp();
+            }
         }
 
         public GameCanvas GetGameCanvas()
