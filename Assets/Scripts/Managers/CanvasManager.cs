@@ -13,6 +13,7 @@ namespace Managers
         [SerializeField] private Canvas skillSelectionCanvas;
         [SerializeField] private Canvas roundEndingCanvas;
         [SerializeField] private Canvas characterChooseCanvas;
+        [SerializeField] private Canvas popUpCanvas;
 
 
         private void Awake()
@@ -31,7 +32,9 @@ namespace Managers
             
             RoundManager.Instance.EndRoundEvent += HideGameCanvas;
             RoundManager.Instance.EndRoundEvent += ShowLevelFinishCanvas;
-
+            
+            ShowPopUpCanvas();
+            GetPopUpCanvas().ShowConnectingPopUp();
         }
 
         public GameCanvas GetGameCanvas()
@@ -162,8 +165,21 @@ namespace Managers
             characterChooseCanvas.GetComponent<FadeHandler>().FadeOut();
 
         }
+
+        public PopupCanvas GetPopUpCanvas()
+        {
+            return popUpCanvas.GetComponent<PopupCanvas>();
+        }
         
-        
+        public void ShowPopUpCanvas()
+        {
+            popUpCanvas.GetComponent<FadeHandler>().FadeIn(0.5f);
+            popUpCanvas.GetComponent<PopupCanvas>().Initialize();
+        }
+        public void HidePopUpCanvas()
+        {
+            popUpCanvas.GetComponent<FadeHandler>().FadeOut();
+        }
 
         public void HideAllCanvases()
         {

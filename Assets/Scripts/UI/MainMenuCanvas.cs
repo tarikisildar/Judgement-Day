@@ -28,6 +28,12 @@ namespace UI
             GameManager.Instance.StartGame(); //TODO: Matchmaking interface
         }
 
+        public void SearchGame()
+        {
+            CanvasManager.Instance.ShowPopUpCanvas();
+            CanvasManager.Instance.GetPopUpCanvas().ShowSearchRoomPopUp();
+        }
+
         public void ChangeMap()
         {
             Maps map = (Maps)PlayerPrefs.GetInt(Constants.MapKey, 0);
