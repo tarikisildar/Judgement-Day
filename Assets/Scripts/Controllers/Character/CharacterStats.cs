@@ -63,7 +63,12 @@ public class CharacterStats : MonoBehaviourPun
     [PunRPC]
     public void TakeDamageFromClient(int damageAmount,int shooterId, bool isCrit = false)
     {
-        if(shooterId == 0) return;
+        if (shooterId == 0)
+        {
+            TakeDamage(damageAmount, null, isCrit);
+
+            return;
+        }
         var shooter = PhotonView.Find(shooterId).Owner; 
         TakeDamage(damageAmount, shooter, isCrit);
         //photonView.RPC("TakeDamage", RpcTarget.AllViaServer, damageAmount, isCrit);
@@ -73,7 +78,7 @@ public class CharacterStats : MonoBehaviourPun
     {
 
         health -= isCrit ? damageAmount * 2 : damageAmount;
-        if (shooter.UserId != photonView.Owner.UserId)
+        if (shooter != null && shooter.UserId != photonView.Owner.UserId)
         {
             shooter.AddScore(isCrit ? damageAmount * 2 : damageAmount);
             if(health < 0){shooter.AddScore(100);}

@@ -28,7 +28,7 @@ namespace UI
             foreach (var player in players)
             {
                 texts.Add(Instantiate(textObject,layoutGroup.transform).GetComponent<TextMeshProUGUI>());
-                texts[texts.Count - 1].text = player.NickName + " - " + player.GetScore();
+                texts[texts.Count - 1].text = player.NickName + " -   " + player.GetScore();
             }
             
 
