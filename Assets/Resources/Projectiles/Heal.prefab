@@ -210,7 +210,7 @@ MonoBehaviour:
   hitParticle: {fileID: 0}
   hitSound: {fileID: 8300000, guid: c8aceeb8092ec7744bf349595778712b, type: 3}
   shooter: {fileID: 0}
-  power: 20
+  power: 25
 --- !u!114 &7840580687273397581
 MonoBehaviour:
   m_ObjectHideFlags: 0

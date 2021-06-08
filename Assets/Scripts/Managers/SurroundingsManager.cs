@@ -218,8 +218,9 @@ namespace Managers
             if(mainPlayer == null) return;
 
             var spawnPositions = GameObject.FindGameObjectsWithTag(Constants.SpawnPositionTag);
-            
-            mainPlayer.transform.position = spawnPositions[0].transform.position;
+            Debug.Log(PhotonNetwork.LocalPlayer.ActorNumber);
+            int index = PhotonNetwork.LocalPlayer.ActorNumber > 0 ? PhotonNetwork.LocalPlayer.ActorNumber - 1 : 0;
+            mainPlayer.transform.position = spawnPositions[index%3].transform.position;
         }
     }
 }

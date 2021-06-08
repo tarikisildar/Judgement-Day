@@ -124,7 +124,7 @@ public class CharacterStats : MonoBehaviourPun
     {
         if(photonView.IsMine)
         {
-            GameObject graveObj = PhotonNetwork.Instantiate(Constants.UniversePath + grave.name, new Vector3(transform.position.x, 0.1f, transform.position.z), transform.rotation);
+            GameObject graveObj = PhotonNetwork.Instantiate(Constants.UniversePath + grave.name, new Vector3(transform.position.x, 0.2f, transform.position.z), transform.rotation);
             //graveObj.transform.position = new Vector3(transform.position.x, 0.1f, transform.position.z);
             //photonView.RPC("setParentSkill", RpcTarget.All, graveObj.GetComponent<PhotonView>().ViewID);
         }

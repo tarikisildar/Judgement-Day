@@ -70,6 +70,7 @@ namespace Managers
             gameState = GameState.GameFinish;
             yield return new WaitForSeconds(Constants.GameEndTime);
             CanvasManager.Instance.HideRoundEndingCanvas();
+            NetworkManager.Disconnect();
 
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }

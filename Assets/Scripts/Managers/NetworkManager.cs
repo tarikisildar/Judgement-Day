@@ -123,6 +123,13 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         }
     }
 
+    public static void Disconnect()
+    {
+        PhotonNetwork.DestroyAll();
+        PhotonNetwork.LeaveRoom();
+        PhotonNetwork.Disconnect();
+    }
+
     void StartGame()
     {
         searchRoomPopup.Starting();
