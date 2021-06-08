@@ -18,5 +18,5 @@ MonoBehaviour:
   projectile: {fileID: 8532953427278778853, guid: 546d76642684a1a4c8fb5a0d6a76e5b1,
     type: 3}
   coolDownTime: 5
-  icon: {fileID: 21300000, guid: f18d13dd8bd4f5b41ad4887f8ecabfc8, type: 3}
-  skillType: 0
+  icon: {fileID: 21300000, guid: 19fc6d3cb21b61f4faea1c449e86858b, type: 3}
+  skillType: 2
