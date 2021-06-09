@@ -41,6 +41,11 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         }
     }
 
+    public static void LeaveRoom()
+    {
+        PhotonNetwork.LeaveRoom();
+    }
+
 
     public static void Connect()
     {
@@ -121,6 +126,13 @@ public class NetworkManager : MonoBehaviourPunCallbacks
             gameReady = true;
             StartGame();
         }
+    }
+
+    public override void OnPlayerLeftRoom(Player otherPlayer)
+    {
+        base.OnPlayerLeftRoom(otherPlayer);
+        searchRoomPopup.SetUserNames();
+
     }
 
     public static void Disconnect()

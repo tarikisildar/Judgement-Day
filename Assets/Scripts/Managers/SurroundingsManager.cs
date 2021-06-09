@@ -216,10 +216,18 @@ namespace Managers
         private void SpawnPositionRandom()
         {
             if(mainPlayer == null) return;
-
+            var players = PhotonNetwork.PlayerList;
+            int index = 0;
+            for (int i = 0; i < players.Length; i++)
+            {
+                if (players[i].UserId == PhotonNetwork.LocalPlayer.UserId)
+                {
+                    index = i;
+                }
+            }
+            
             var spawnPositions = GameObject.FindGameObjectsWithTag(Constants.SpawnPositionTag);
-            Debug.Log(PhotonNetwork.LocalPlayer.ActorNumber);
-            int index = PhotonNetwork.LocalPlayer.ActorNumber > 0 ? PhotonNetwork.LocalPlayer.ActorNumber - 1 : 0;
+            //int index = PhotonNetwork.LocalPlayer.ActorNumber > 0 ? PhotonNetwork.LocalPlayer.ActorNumber - 1 : 0;
             mainPlayer.transform.position = spawnPositions[index%3].transform.position;
         }
     }

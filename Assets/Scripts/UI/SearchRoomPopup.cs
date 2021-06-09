@@ -14,11 +14,13 @@ namespace UI
         [SerializeField] private GameObject layoutGroup;
         [SerializeField] private GameObject userText;
         [SerializeField] private Timer timer;
+        [SerializeField] private GameObject exitButton;
 
 
         public void Searching()
         {
             title.GetComponent<ThreeDots>().SetOriginalText("Searching For A Game");
+            exitButton.SetActive(true);
         }
 
         public void WaitingPlayers()
@@ -52,8 +54,15 @@ namespace UI
         public void Starting()
         {
             title.GetComponent<ThreeDots>().SetOriginalText("Starting");
+            exitButton.SetActive(false);
             timer.gameObject.SetActive(true);
             timer.Activate(4);
+        }
+
+        public void CancelSearch()
+        {
+            NetworkManager.LeaveRoom();
+            transform.parent.GetComponent<PopupCanvas>().HideSearchRoomPopUp();
         }
     }
 }

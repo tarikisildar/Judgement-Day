@@ -24,6 +24,8 @@ public class CharacterStats : MonoBehaviourPun
     private RectTransform rectTransform;
     private Camera camera;
     private bool isDead = false;
+    private Rigidbody rigidbody;
+    
     
     void Start()
     {
@@ -31,6 +33,18 @@ public class CharacterStats : MonoBehaviourPun
         slider.value = CalculateHealth();
         rectTransform = healthBarUI.GetComponent<RectTransform>();
         camera = Camera.main;
+        rigidbody = GetComponent<Rigidbody>();
+        rigidbody.useGravity = false;
+
+        StartCoroutine(WaitForRigidBody());
+    }
+
+
+    IEnumerator WaitForRigidBody()
+    {
+        if(PhotonNetwork.InRoom)
+            yield return new WaitForSeconds(1f);
+        rigidbody.useGravity = true;
     }
 
     // Update is called once per frame
